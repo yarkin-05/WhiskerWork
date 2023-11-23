@@ -7,19 +7,28 @@ error_reporting(E_ALL);
 function pdo_connect_mysql(){
 
   $DATABASE_HOST = '64.226.72.83';
-  $DATABASE_USER = 'localhost';
+  $DATABASE_USER = 'admin';
   $DATABASE_PASS = '3626400eeb94cdea37cbe094656a925668fa0f94797fa148';
   $DATABASE_NAME = 'WhiskerWork';
 
   
   try{
-    return new PDO('mysql:host='. $DATABASE_HOST.';dbname='. $DATABASE_NAME. ';charset=utf8mb4_unicode_ci', $DATABASE_USER, $DATABASE_PASS);
+    return new PDO('mysql:host='. $DATABASE_HOST.';dbname='. $DATABASE_NAME. ';charset=utf8mb4', $DATABASE_USER, $DATABASE_PASS);
     
   } catch (PDOException $e) {
     $error = ''. $e->getMessage();
+    echo 'wtf';
     exit ($error);
   }
 }
+function fetchTasks(){
+  $pdo = pdo_connect_mysql();
+  $stmt = $pdo -> query('SELECT * FROM gant');
+  $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+  return $result;
+}
+
+$tasks = fetchTasks();
 
 ?>
 
@@ -29,7 +38,6 @@ function pdo_connect_mysql(){
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gantt Chart</title>
-  <link href="styles.css" rel="stylesheet">
 
   <style>
     /* Add your CSS styles for the Gantt chart here */
@@ -53,13 +61,12 @@ function pdo_connect_mysql(){
 </head>
 <body>
   <h1>Gantt Chart</h1>
-
   <table>
     <thead>
       <tr>
-        <th>Nº Actividad</th>
-        <th>Inicio</th>
-        <th>Final</th>
+        <th>Activity</th>
+        <th>Starting Date</th>
+        <th>Final Date</th>
         <th>21 Nov</th>
         <th>22 Nov</th>
         <th>23 Nov</th>
@@ -70,27 +77,27 @@ function pdo_connect_mysql(){
         <th>28 Nov </th>
         <th>29 Nov </th>
         <th>30 Nov </th>
-        <th>01 Dic </th>
-        <th>02 Dic </th>
-        <th>03 Dic </th>
-        <th>04 Dic </th>
-        <th>05 Dic </th>
-        <th>06 Dic </th>
+        <th>01 Dec </th>
+        <th>02 Dec </th>
+        <th>03 Dec </th>
+        <th>04 Dec </th>
+        <th>05 Dec </th>
+        <th>06 Dec </th>
         <th>Progress</th>
       </tr>
     </thead>
-    <tbody>
-      <!-- Rows for activities -->
-      <tr>
-        <td>1</td>
-        <td>Start Date</td>
-        <td>End Date</td>
-        <td></td>
-        <!-- ... Add cells for each date -->
-        <td>Progress Bar or %</td>
-      </tr>
-      <!-- Add more rows for each activity -->
-    </tbody>
+      <?php foreach ($tasks as $task):?>
+        <tbody>
+          <tr>
+          <td>1</td>
+          <td>Start Date</td>
+          <td>End Date</td>
+          <td></td>
+          <td>Progress Bar or %</td>
+          </tr>
+        </tbody>
+      <?php endforeach; ?>
+      
   </table>
 
   <!-- Include JavaScript for dynamic updates if needed -->
