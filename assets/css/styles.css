@@ -1,0 +1,48 @@
+body {
+  border-color: var(--bs-body-bg);
+  font-family: ABeeZee, sans-serif;
+}
+
+.btn {
+  border-radius: 10px;
+}
+
+.navbar {
+  background: rgb(214,184,237);
+  /*border-bottom: 0px solid var(--bs-navbar-color) ;*/
+  backdrop-filter: blur(61px);
+  -webkit-backdrop-filter: blur(61px);
+}
+
+.hero-content {
+  background: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .hero-content {
+    background: transparent;
+    height: 368.201px;
+    color: rgb(255,255,255);
+  }
+}
+
+.card .btn {
+  background: transparent;
+  padding-right: 11px;
+  border-style: none;
+  border-bottom-style: none;
+  border-bottom-color: var(--bs-secondary-color);
+}
+
+.card:hover .card-img {
+  transform: scale(1.10);
+}
+
+.card {
+  overflow: hidden;
+}
+
+.card .card-img {
+  transition: all ease .3s;
+}
+

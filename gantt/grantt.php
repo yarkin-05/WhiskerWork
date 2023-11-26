@@ -4,31 +4,36 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 //important to note that this part is only for development environments
 
+$msg = '';
 function pdo_connect_mysql(){
 
-  $DATABASE_HOST = '64.226.72.83';
-  $DATABASE_USER = 'admin';
-  $DATABASE_PASS = '3626400eeb94cdea37cbe094656a925668fa0f94797fa148';
-  $DATABASE_NAME = 'WhiskerWork';
+  $DATABASE_HOST = 'localhost';
+  $DATABASE_USER = 'root';
+  $DATABASE_PASS = 'root';
+  $DATABASE_NAME = 'whiskerwork';
 
   
   try{
-    return new PDO('mysql:host='. $DATABASE_HOST.';dbname='. $DATABASE_NAME. ';charset=utf8mb4', $DATABASE_USER, $DATABASE_PASS);
+    return new PDO('mysql:host='. $DATABASE_HOST.';dbname='. $DATABASE_NAME. ';charset=utf8', $DATABASE_USER, $DATABASE_PASS);
     
   } catch (PDOException $e) {
     $error = ''. $e->getMessage();
-    echo 'wtf';
     exit ($error);
   }
 }
+
 function fetchTasks(){
   $pdo = pdo_connect_mysql();
   $stmt = $pdo -> query('SELECT * FROM gant');
   $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+  if ($result === false){
+    return [];
+  }
   return $result;
 }
 
 $tasks = fetchTasks();
+$msg = $tasks;
 
 ?>
 
@@ -83,26 +88,38 @@ $tasks = fetchTasks();
         <th>04 Dec </th>
         <th>05 Dec </th>
         <th>06 Dec </th>
-        <th>Progress</th>
       </tr>
     </thead>
       <?php foreach ($tasks as $task):?>
+        
         <tbody>
           <tr>
-          <td>1</td>
-          <td>Start Date</td>
-          <td>End Date</td>
-          <td></td>
-          <td>Progress Bar or %</td>
+              <?php foreach ($task as $key => $t): ?>
+                <?php if ($key !== 'id'): ?>
+                  <?php if ($t === '1') :?>
+                    <td style = 'background-color: green;'>
+                    </td>
+                  <?php elseif($t === '0'):?>
+                    <td style = 'background-color: white;'>
+                    </td>
+                  <?php else :?>
+                  <td> <?=$t?> </td>
+                  <?php endif ; ?>
+                    
+                <?php endif; ?>
+            <?php endforeach; ?>
           </tr>
         </tbody>
       <?php endforeach; ?>
       
   </table>
+  <a href="form.php" class="button">New Entry</a>
 
-  <!-- Include JavaScript for dynamic updates if needed -->
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous">
+
+  </script>
   <script>
-    // Add your JavaScript logic here for dynamic updates
+   
   </script>
 </body>
 </html>

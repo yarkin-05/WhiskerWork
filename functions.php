@@ -3,7 +3,7 @@
 function pdo_connect_mysql(){
 
   $DATABASE_HOST = '64.226.72.83';
-  $DATABASE_USER = 'localhost';
+  $DATABASE_USER = 'admin';
   $DATABASE_PASS = '3626400eeb94cdea37cbe094656a925668fa0f94797fa148';
   $DATABASE_NAME = 'WhiskerWork';
 
@@ -16,4 +16,18 @@ function pdo_connect_mysql(){
     exit ($error);
   }
 }
+
+  function check_sql_statement($stmt, $values){
+    if ($stmt->execute($values)) {
+      // If execution is successful, perform actions here
+      echo "Data inserted successfully!";
+    } else {
+      // If there's an error during execution, handle it here
+      $errorInfo = $stmt->errorInfo(); // Fetch error information
+      
+      // Log or display the error message
+      echo "Error: " . $errorInfo[2]; 
+    }
+  }
+
 ?>
