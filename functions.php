@@ -3,8 +3,8 @@
 function pdo_connect_mysql(){
 
   $DATABASE_HOST = '64.226.72.83';
-  $DATABASE_USER = 'admin';
-  $DATABASE_PASS = '3626400eeb94cdea37cbe094656a925668fa0f94797fa148';
+  $DATABASE_USER = 'whisker';
+  $DATABASE_PASS = 'whisker';
   $DATABASE_NAME = 'WhiskerWork';
 
   

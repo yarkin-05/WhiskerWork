@@ -20,3 +20,6 @@ CREATE TABLE gant(
   Dec05 TINYINT DEFAULT 0,
   Dec06 TINYINT DEFAULT 0
 );
+
+INSERT INTO gant (descriptions, starts, final, Nov21) VALUES ('equipos', '2023-11-21', '2023-11-23', 1);
+
