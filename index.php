@@ -1,3 +1,11 @@
+<?php
+
+include 'functions.php';
+$pdo = pdo_connect_mysql();
+
+?>
+
+
 <!DOCTYPE html>
 <html data-bs-theme="light" lang="en">
 
