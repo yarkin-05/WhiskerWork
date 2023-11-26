@@ -5,10 +5,10 @@ error_reporting(E_ALL);
 
 function pdo_connect_mysql(){
 
-  $DATABASE_HOST = 'localhost';
-  $DATABASE_USER = 'root';
-  $DATABASE_PASS = 'root';
-  $DATABASE_NAME = 'whiskerwork';
+  $DATABASE_HOST = '167.172.184.23';
+  $DATABASE_USER = 'whisker';
+  $DATABASE_PASS = 'whisker';
+  $DATABASE_NAME = 'WhiskerWork';
 
   
   try{
