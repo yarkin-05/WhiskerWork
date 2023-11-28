@@ -21,14 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<?= template_header_login('Recover Username') ?>
+<?= template_header('Recover Username') ?>
 <form method='post' action='recover_username.php'>
     <input type="email" name='email' placeholder="Email" id="email">
     <input type="submit" value="Recover Username" id="recover_username">
 </form>
 
-<?= $msg ?> <!-- Display the result message -->
-<a href='login.php'> Return to Login </a>
+<?= $msg ?> 
 
 
 <?= template_footer() ?>

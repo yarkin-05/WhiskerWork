@@ -88,7 +88,7 @@ $(document).ready(function(){
           success: function(msg){
             console.log('server responded with: ' + msg);
             message.text(msg);
-            //window.location.href = 'dashboard.php';
+            window.location.href = 'dashboard.php';
           }
         }).fail(function(msg){
           console.log(msg);
@@ -121,8 +121,6 @@ $(document).ready(function(){
           },
           success: function(msg){
             console.log('server responded with: ' + msg);
-            message.text(msg);
-            //window.location.href = 'dashboard.php';
           }
         }).fail(function(msg){
           console.log(msg);

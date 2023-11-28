@@ -7,7 +7,7 @@ include 'functions.php';
 session_start();
 ?>
 
-<?= template_header_login('Reset Password') ?>
+<?= template_header('Reset Password') ?>
 
 <form method='post'>
   <label for="username"> Please input the username associated with your account</label>
@@ -29,7 +29,6 @@ session_start();
 
   </p>
 </div>
-<p>Return to <a href='login.php'>login</a></p>
 
 
 <?= template_footer() ?>

@@ -31,7 +31,7 @@ if(isset($_POST['name']) and isset($_POST['difference']) and isset($_POST['start
   $difference = $_POST['difference'];
 
   //start constructing the sql query
-  $sql = "INSERT INTO gant (descriptions, starts, final";
+  $sql = "INSERT INTO gant (descriptions, start, final";
 
   $startDateTime = new DateTime($start);
   $endDateTime = new DateTime($final);
@@ -69,7 +69,7 @@ if(isset($_POST['name']) and isset($_POST['difference']) and isset($_POST['start
   if ($stmt->execute($values)) {
     // If execution is successful, perform actions here
     //echo "Data inserted successfully!";
-    header('Location: grantt.php');
+    header('Location: gantt.php');
     exit;
   } else {
     // If there's an error during execution, handle it here
@@ -107,8 +107,8 @@ if(isset($_POST['name']) and isset($_POST['difference']) and isset($_POST['start
       let final = new Date($('#final').val());
 
       //testing dates
-      //console.log(start);
-      //console.log(final);
+      console.log(start);
+      console.log(final);
       
       let startDate = new Date(2023, 10, 20); // November is represented as 10 (0-indexed) in JavaScript
       let finalDate = new Date(2023, 11, 6); // December is represented as 11
@@ -138,7 +138,7 @@ if(isset($_POST['name']) and isset($_POST['difference']) and isset($_POST['start
           },
           success: function(msg){
             console.log(msg);
-            window.location.href = 'grantt.php';
+            window.location.href = 'gantt.php';
           },error:function(error){
             console.log(error);
           }

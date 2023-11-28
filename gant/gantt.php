@@ -43,6 +43,8 @@ $msg = $tasks;
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gantt Chart</title>
+  <link rel="icon" type="image/x-icon" href="images/logo_patita.png">
+
 
   <style>
     /* Add your CSS styles for the Gantt chart here */
@@ -95,11 +97,11 @@ $msg = $tasks;
         <tbody>
           <tr>
               <?php foreach ($task as $key => $t): ?>
-                <?php if ($key !== 'id'): ?>
-                  <?php if ($t === '1') :?>
-                    <td style = 'background-color: green;'>
+                <?php if ($key != 'id'): ?>
+                  <?php if ($t == '1') :?>
+                    <td style = 'background-color: green'>
                     </td>
-                  <?php elseif($t === '0'):?>
+                  <?php elseif($t == '0'):?>
                     <td style = 'background-color: white;'>
                     </td>
                   <?php else :?>

@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 ?>
 
 
-<?= template_header_login('Register') ?>
+<?= template_header_login('Login') ?>
 <form method = "post" >
 
   <input type='text' name='username' id='username' placeholder='Username'>

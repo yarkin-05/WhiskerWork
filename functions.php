@@ -101,7 +101,7 @@ function pdo_connect_mysql(){
           class="navbar-brand mb-0 h1">
           <img 
           class="d-inline-block align-top"
-          src="images/gray.png" width="24px" height="auto">
+          src="images/logo_patita.png" width="24px" height="auto">
           WhiskerWorks
         </a>
         
@@ -138,7 +138,7 @@ function pdo_connect_mysql(){
           class="navbar-brand mb-0 h1">
           <img 
           class="d-inline-block align-top"
-          src="images/gray.png" width="24px" height="auto">
+          src="images/logo_patita.png" width="24px" height="auto">
           WhiskerWorks
         </a>
         
