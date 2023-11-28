@@ -6,8 +6,8 @@ error_reporting(E_ALL);
 function pdo_connect_mysql(){
 
   $DATABASE_HOST = '64.226.72.83';
-  $DATABASE_USER = 'whisker';
-  $DATABASE_PASS = 'whisker';
+  $DATABASE_USER = 'jacqui';
+  $DATABASE_PASS = 'morusa';
   $DATABASE_NAME = 'WhiskerWork';
 
   
