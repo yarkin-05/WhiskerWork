@@ -54,6 +54,23 @@ switch($action){
     break;
 
   case 'reset_password':
+    $username = $_POST['username'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); //new, need to update
+
+    $id = get_id_from_username($username);
+    if($id){
+      if(reset_password($id, $password)){
+        $msg = 'Update was a success!';
+        $_SESSION['password'] = $password;
+      }
+      else{
+        $msg = 'Something failed';
+      }
+
+    }else{
+      $msg = 'there is no account associated with that username';
+    }
+    echo $msg;
     break;
 
 }

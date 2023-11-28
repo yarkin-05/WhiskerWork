@@ -29,7 +29,7 @@ session_start();
 
   </p>
 </div>
-
+<p>Return to <a href='login.php'>login</a></p>
 
 
 <?= template_footer() ?>

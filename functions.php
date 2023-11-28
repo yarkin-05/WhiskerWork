@@ -56,6 +56,25 @@ function pdo_connect_mysql(){
     return $stmt -> fetch(PDO::FETCH_ASSOC);
   }
 
+  function get_id_from_username($username){
+    $pdo = pdo_connect_mysql();
+    $stmt = $pdo -> prepare('SELECT id FROM users WHERE username = ?');
+    $stmt -> execute([$username]);
+    $row = $stmt -> fetchColumn();
+    return $row;
+  }
+
+  function reset_password($id, $new_password){
+    $pdo = pdo_connect_mysql();
+    $stmt = $pdo -> prepare('UPDATE users SET password = ? WHERE id = ?');
+    $stmt -> execute([$new_password, $id]);
+    if ($stmt->rowCount() > 0) {
+      return true; 
+    } else {
+      return false; 
+    }
+  }
+
   
 
   function template_header($title){
