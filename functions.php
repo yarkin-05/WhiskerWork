@@ -2,6 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 function pdo_connect_mysql(){
 
   $DATABASE_HOST = '64.226.72.83';
@@ -48,6 +49,15 @@ function pdo_connect_mysql(){
     }
   }
 
+  function login($username){
+    $pdo = pdo_connect_mysql();
+    $stmt = $pdo -> prepare('SELECT * FROM users WHERE username = ?');
+    $stmt -> execute([$username]);
+    return $stmt -> fetch(PDO::FETCH_ASSOC);
+  }
+
+  
+
   function template_header($title){
     echo <<<EOT
     <!DOCTYPE html>
@@ -56,8 +66,13 @@ function pdo_connect_mysql(){
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>$title</title>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
       <link href = "styles.css" rel="stylesheet">
+
     </head>
 
     <body>
@@ -70,19 +85,8 @@ function pdo_connect_mysql(){
           src="images/gray.png" width="24px" height="auto">
           WhiskerWorks
         </a>
-        <div class="collapse navbar-collapse"        id="navbarNav">
-          <ul class="navbar-nav">
-            <li class="nav-item active>
-              <a href="#" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item active>
-              <a href="#" class="nav-link">Home</a>
-            </li>
-            <li class="nav-item active>
-              <a href="#" class="nav-link">Home</a>
-            </li>
-          </ul>    
-        </div>
+        
+        <a href="login.php">Log In </a>
       </nav>
       
       
@@ -91,6 +95,42 @@ function pdo_connect_mysql(){
     EOT;
   }
 
+  function template_header_login($title){
+    echo <<<EOT
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>$title</title>
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+      <link href = "styles.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a
+          href="#"
+          class="navbar-brand mb-0 h1">
+          <img 
+          class="d-inline-block align-top"
+          src="images/gray.png" width="24px" height="auto">
+          WhiskerWorks
+        </a>
+        
+        <a href="logout.php">Log Out </a>
+      </nav>
+      
+      
+      
+  
+    EOT;
+  }
   function template_footer(){
     echo <<<EOT
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

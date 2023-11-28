@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 include 'functions.php';
 ?>
 
@@ -13,7 +16,7 @@ include 'functions.php';
   <input type='email' name='email' id='email' placeholder='Email'>
 
   <input type='password' name='password' id='password' placeholder="Password">
-
+  <i class="far fa-eye" id="togglePassword"></i>
   <input type='password' name='password_verification' id='verification' placeholder="Verify password" >
   <input type='button' id='registration_form'>
   <div id='alert'>
