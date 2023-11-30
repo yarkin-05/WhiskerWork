@@ -46,8 +46,9 @@ completeTodo(0);
 removeTodo(1);
 */
 $(document).ready(function(event){
-  let id = 0;
 
+
+  
   $('#add_todo').click(function(e){
     e.preventDefault();
     e.stopPropagation();
@@ -74,7 +75,6 @@ $(document).ready(function(event){
     id++;
   });
 
-  // Adding event listener to dynamically created delete buttons
   addTrash();
 });
 

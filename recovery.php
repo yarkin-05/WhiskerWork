@@ -37,14 +37,13 @@ if($user){
     else if ($domain === 'outlook.com') $mail->Host = 'smtp-mail.outlook.com';
    
     $mail->SMTPAuth= true; //Enable SMTP authentication
-    $mail->Username= 'uoftmetas@gmail.com'; //SMTP username
-    //whiskerworks@httpswhiskerwork-yhtk.me
-    $mail->Password = 'amomicarro1';  //SMTP password
+    $mail->Username= 'whiskerworks@httpswhiskerwork-yhtk.me'; //SMTP username
+    $mail->Password = '5HAp8W7g4W.rE!Q';  //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Enable implicit TLS encryption
     $mail->Port = 587;
 
     //Recipients
-    $mail->setFrom('uoftmetas@gmail.com', 'WhiskerWorks');
+    $mail->setFrom('whiskerworks@httpswhiskerwork-yhtk.me', 'WhiskerWorks');
     $mail->addAddress($email, 'Reset Password');     //Add a recipient
 
     $mail->isHTML(true);  //Set email format to HTML

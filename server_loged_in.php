@@ -7,4 +7,6 @@ error_reporting(E_ALL);
 session_start();
 redirectIfNotLoggedIn();
 //for managing all the server side requests when logged in
+
+$id = $_SESSION['id'];
 ?>

@@ -21,10 +21,17 @@ redirectIfNotLoggedIn();
     <div id='to-dos'>
 
     </div>
+    <input type='submit' value='Add task'>
   </div>
+
   
 
 
 </form>
+<div id='nomas'>
+  <p>
+
+  </p>
+</div>
 
 <?= template_footer() ?>
