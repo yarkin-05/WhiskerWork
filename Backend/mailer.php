@@ -28,7 +28,7 @@ require '../PHPMailer-master/src/SMTP.php';
       //content
       $mail->isHTML(true);  //Set email format to HTML
       $mail->Subject = 'Verify your account';
-      $mail->Body = '<h1>Hi! '.$name.'</h1> <br> 
+      $mail->Body = '<h1>Hi! 1 '.$name.'</h1> <br> 
       <h5>
         Verify your account at <a href="https://httpswhiskerwork-yhtk.me/BackEnd/verification.php?token='.$token.'">link</a>
       </h5>';

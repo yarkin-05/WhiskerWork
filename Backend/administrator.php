@@ -56,13 +56,16 @@ session_start();
     }
     
     var_dump($email);
-    /*$token = bin2hex(random_bytes(50)); //verification token
+    $token = bin2hex(random_bytes(60)); //verification token
+    var_dump($token);
+
+    
     include 'mailer.php';
     Verify_User($name, $email, $token); //send verification email
-    */
+    
     $hash = password_hash($password, PASSWORD_DEFAULT); //password hash
 
-    $pdo = pdo_connect_mysql();
+    /*$pdo = pdo_connect_mysql();
     $stmt = $pdo -> prepare('INSERT INTO users (name, last_name, username, email, password) VALUES (?,?,?,?,?)');
     $values = [$name, $last_name, $username, $email, $hash];
 
@@ -85,7 +88,7 @@ session_start();
         $stmt->closeCursor();
         $pdo = null;
         exit();
-    }
+    }*/
 
 
   }
