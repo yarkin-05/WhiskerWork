@@ -3,6 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+
 function pdo_connect_mysql(){
 
   $DATABASE_HOST = '64.226.72.83';
@@ -20,18 +21,14 @@ function pdo_connect_mysql(){
   }
 }
 
-  function check_sql_statement($stmt, $values){
-    if ($stmt->execute($values)) {
-      // If execution is successful, perform actions here
-      echo "Data inserted successfully!";
-    } else {
-      // If there's an error during execution, handle it here
-      $errorInfo = $stmt->errorInfo(); // Fetch error information
-      
-      // Log or display the error message
-      echo "Error: " . $errorInfo[2]; 
-    }
+function redirectIfNotLoggedIn() {
+  // Check if session variables are set
+  if (!isset($_SESSION['username']) || !isset($_SESSION['id'])) {
+      header('Location: welcome.php');
+      exit;
   }
+}
+
 
   function register($name, $last_name,$username, $email, $hash){
     $pdo = pdo_connect_mysql();
@@ -85,8 +82,12 @@ function pdo_connect_mysql(){
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>$title</title>
+      <link rel="icon" type="image/x-icon" href="images/logo_patita.png">
+
 
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -122,8 +123,13 @@ function pdo_connect_mysql(){
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>$title</title>
+      <link rel="icon" type="image/x-icon" href="images/logo_patita.png">
+
 
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
 
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -158,6 +164,7 @@ function pdo_connect_mysql(){
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
       <script src="events.js" ></script>
+      <script src="todo.js"></script>
 
     </body>
     </html>

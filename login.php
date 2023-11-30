@@ -20,9 +20,7 @@ error_reporting(E_ALL);
 
   <input type='button' id='login_form' value="Submit">
   
-  <p> Forgot Password? 
-    <a href="reset_password.php">Reset Password</a>
-  </p>
+  <a href="recover_password.php">Forgot password?</a>
 
   <div id='alert'>
     <p>

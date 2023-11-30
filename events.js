@@ -1,21 +1,14 @@
+
 function isEmpty(str){
   return (!str || str.length === 0);
 }
 
-//toggle passwords
-const togglePasswords = document.querySelectorAll('#togglePassword');
-const passwords = document.querySelectorAll('input[type=password]');
-
-togglePasswords.forEach(function(togglePassword, index) {
-  togglePassword.addEventListener('click', function(event) {
-    const type = passwords[index].getAttribute('type') === 'password' ? 'text' : 'password';
-    passwords[index].setAttribute('type', type);
-    this.classList.toggle('fa-eye-slash');
-  });
+$('#togglePassword').on('click', function() {
+  const passwordField = $('#password');
+  const fieldType = passwordField.attr('type');
+  passwordField.attr('type', fieldType === 'password' ? 'text' : 'password');
+  $(this).toggleClass('fa-eye fa-eye-slash');
 });
-
-//end of toggle passwords
-
 
 $(document).ready(function(){
 
@@ -49,7 +42,7 @@ $(document).ready(function(){
           success: function(msg){
             console.log('server responded with: ' + msg);
             message.text(msg);
-            //window.location.href = 'dashboard.php';
+            if(msg != -1) window.location.href = 'dashboard.php';
 
           }
         }).fail(function(jqXHR, textStatus, errorThrown){
@@ -88,7 +81,7 @@ $(document).ready(function(){
           success: function(msg){
             console.log('server responded with: ' + msg);
             message.text(msg);
-            window.location.href = 'dashboard.php';
+            if(msg != -1) window.location.href = 'dashboard.php';
           }
         }).fail(function(msg){
           console.log(msg);
@@ -134,9 +127,43 @@ $(document).ready(function(){
   });
 
 
+  $('#recover_password').click(function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    let email = $('#email').val();
+    let message = $('#alert p'); //the alert message
+    if(!isEmpty(email)){
+      $.ajax({
+        url: 'recovery.php',
+        type: 'POST',
+        data:{ 'email': email },
+        success: function(msg){
+          console.log('server responded with: ' + msg);
+          message.text(msg);
+          
+        }
+      }).fail(function(msg){
+        console.log(msg);
+      });
+    }else{
+      message.text('Please provide an email');
+    }
+    
+  })
 
-
-
-  //toggle passwords
   
 })
+
+/*
+ let newInput = $('<input>').attr({
+      type: 'checkbox',
+      id: 'todo_item',
+      name: 'todo_item',
+    });
+
+    // Create a label for the checkbox
+    let label = $('<input>').attr({
+      type: 'text',
+      id: 'todo_item',
+      name: 'todo_item',
+    }); */

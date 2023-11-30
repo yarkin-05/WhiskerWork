@@ -25,7 +25,7 @@ switch($action){
       $_SESSION['password'] = $hashed;
       $msg = 'User created!';
     }else{
-      $msg = 'Something went wrong';
+      $msg = -1;
     }
     echo $msg;
     break;
@@ -45,10 +45,10 @@ switch($action){
           $_SESSION['email'] = $user['email'];
           $msg = 'User logged in';
         }else{
-          $msg = 'Passwords do not match';
+          $msg = -1;
         }
     }else{
-      $msg = 'Username invalid, please enter a valid username';
+      $msg = -1;
     }
     echo $msg;
     break;
@@ -64,11 +64,11 @@ switch($action){
         $_SESSION['password'] = $password;
       }
       else{
-        $msg = 'Something failed';
+        $msg = -1;
       }
 
     }else{
-      $msg = 'there is no account associated with that username';
+      $msg = -1;
     }
     echo $msg;
     break;

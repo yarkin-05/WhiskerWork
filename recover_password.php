@@ -7,9 +7,14 @@ error_reporting(E_ALL);
 ?>
 
 <?=template_header('Recover Password') ?>
-<form method='post'>
+<form method='post' method="recovery.php">
   <label for='email'> Please enter the email and password to reset your password</label>
   <input type="text" id='email' name="email">
-  <input type="submit">
+  <input type="submit" value="Recover Password" id="recover_password">
 </form>
+<div id='alert'>
+  <p>
+
+  </p>
+</div>
 <?=template_footer()?>

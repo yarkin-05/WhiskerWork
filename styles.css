@@ -1,4 +1,21 @@
 i #togglePassword{
   margin-left: -30px;
   cursor: pointer;
+  
+}
+
+.btn-link{
+  padding: 12px;
+  margin: 1px;
+  background-color: rgb(63, 142, 126);
+  color: white;
+  border: 1px solid white;
+}
+
+
+.to-do{
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+  padding: 2px 5px;
 }
