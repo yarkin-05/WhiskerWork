@@ -4,6 +4,116 @@ include 'db.php'; //incluye la base de datos
 include 'functions.php'; //incluye algunas funciones de apoyo
 session_start();
 
+  /** ------------------------------------
+   *  REGISTRATION PROCESS
+   *///
+  function send_verification_code($name, $last_name, $username, $email){
+    
+    if (!isValidDomain($email)) {
+      $_SESSION['error'] = 'Invalid email address';
+      header('Location: ../register.php');
+      exit();
+    }
+  
+    $token = bin2hex(random_bytes(50)); // Temporary password
+    $expiryTime = date('Y-m-d H:i:s', strtotime('+30 minutes')); // Expiry set to 30 minutes from now
+    
+    include 'mailer.php';
+    Verify_User($email, $token); // Send temporary password
+    
+    $pdo = pdo_connect_mysql();
+
+    $stmt = $pdo->prepare('INSERT INTO users (name, last_name, username, email, token, token_expiry) VALUES (?, ?, ?, ?, ?, ?)');
+
+    $values = [$name, $last_name, $username, $email, $token, $expiryTime]; 
+    
+    if ($stmt->execute($values)) {
+        $id = $pdo->lastInsertId();
+        $_SESSION['info'] = array();
+        $_SESSION['info']['id'] = $id;
+        $_SESSION['info']['username'] = $username;
+        $_SESSION['info']['email'] = $email;
+        //var_dump($id);
+    } else {
+        $errorInfo = $stmt->errorInfo();
+        var_dump($errorInfo[2]);
+        $_SESSION['error'] = 'Registration failed';
+        //echo $_SESSION['error'];
+    
+        header("Location: ../register.php");
+        $stmt->closeCursor();
+        $pdo = null;
+        exit();
+    }
+  }
+
+  function check_temp_password($temporary_password){
+
+    $pdo = pdo_connect_mysql();
+
+    $stmt = $pdo->prepare('SELECT token, token_expiry FROM users WHERE id = ?');
+
+    $stmt->execute([$_SESSION['info']['id']]);
+    $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+    $token = $userData['token'];
+    $expiry = $userData['token_expiry'];
+    $Time = date('Y-m-d H:i:s');
+
+    if($userData){
+ 
+      if($token === $temporary_password && $expiry > $Time){
+        $query = $pdo->prepare('UPDATE users SET token = NULL, token_expiry = NULL WHERE id = ?');
+        $query->execute([$_SESSION['info']['id']]);
+        $_SESSION['temporary_registration'] = true;
+        $stmt->closeCursor();
+        $pdo = null;
+        exit();
+
+      }else{
+        $_SESSION['error'] = 'Registration failed, temporary password is incorrect, or more than 30 minutes have passed';
+
+        echo $_SESSION['error'];
+        $stmt->closeCursor();
+        $pdo = null;
+        exit();
+      }
+    }else{
+      $_SESSION['error'] = 'Registration failed';
+      echo $_SESSION['error'];
+      $stmt->closeCursor();
+      $pdo = null;
+      exit();
+    }
+    
+  }
+
+  function reset_password($password){
+
+    $pdo = pdo_connect_mysql();
+    $hash = password_hash($password, PASSWORD_DEFAULT); //secure password
+
+    $stmt = $pdo->prepare('UPDATE users SET password = ? WHERE id = ?');
+
+    if($stmt -> execute([$hash,$_SESSION['info']['id']])){
+      unset($_SESSION['temporary_registration']); // Unset the temp registration because you ar enow registered
+      $stmt->closeCursor();
+      $pdo = null;
+      header('Location: ../dashboard.php');
+      exit();
+    }else{
+      $_SESSION['error'] = 'Something went wrong';
+      echo $_SESSION['error'];
+      $stmt->closeCursor();
+      $pdo = null;
+     // header('Location: ../dashboard.php');
+      exit();
+    }
+
+  }
+
+  /**
+   * END OF REGISTRATION PROCESS
+   *///-----------------------------------------------
 
 
   /*-------------------------------------
@@ -56,12 +166,12 @@ session_start();
     }
     
     var_dump($email);
-    $token = bin2hex(random_bytes(60)); //verification token
-    var_dump($token);
+    $token = bin2hex(random_bytes(60)); //temporary password
+    //var_dump($token);
 
     
     include 'mailer.php';
-    Verify_User($name, $email, $token); //send verification email
+    //Verify_User($name, $email, $token); //send temporary email
     
     $hash = password_hash($password, PASSWORD_DEFAULT); //password hash
 

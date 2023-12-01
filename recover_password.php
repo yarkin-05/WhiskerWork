@@ -1,6 +1,6 @@
 <?php
 //this is for sending emails for passwords, it would be an extra elemet
-include 'functions.php';
+include 'Backend/templates.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);

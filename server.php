@@ -33,24 +33,6 @@ switch($action){
   case 'login':
     $username = $_POST['username'];
     $password = $_POST['password'];
-
-    $user = login($username);
-    if($user){
-      //user exists
-        if($user && password_verify($password, $user['password'])){
-          //passwords match
-          $_SESSION['username'] = $username;
-          $_SESSION['password'] = $user['password'];
-          $_SESSION['id'] = $user['id'];
-          $_SESSION['email'] = $user['email'];
-          $msg = 'User logged in';
-        }else{
-          $msg = -1;
-        }
-    }else{
-      $msg = -1;
-    }
-    echo $msg;
     break;
 
   case 'reset_password':

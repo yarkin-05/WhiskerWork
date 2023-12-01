@@ -4,13 +4,13 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
+
+if(!isset($_SESSION['temporary_registration']) or !$_SESSION['temporary_registration']) header('Location: register.php');
 ?>
 
 <?= template_header('Reset Password') ?>
 
 <form method='post'>
-  <label for="username"> Please input the username associated with your account</label>
-  <input type="text" name="username" id="username">
 
   <label for="password"> Please input the new password</label>
   <input type="password" name="new_password" id="new_password">

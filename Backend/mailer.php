@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -7,7 +8,7 @@ require '../PHPMailer-master/src/Exception.php';
 require '../PHPMailer-master/src/PHPMailer.php';
 require '../PHPMailer-master/src/SMTP.php';
 
-  function Verify_User($name, $email, $token){
+  function Verify_User($email, $token){
     $mail = new PHPMailer(true);
     
     try {
@@ -23,14 +24,14 @@ require '../PHPMailer-master/src/SMTP.php';
 
       //Recipients
       $mail->setFrom('whiskerworks@httpswhiskerwork-yhtk.me', 'WhiskerWorks');
-      $mail->addAddress($email, $name); //Add a recipient
+      $mail->addAddress($email); //Add a recipient
 
       //content
       $mail->isHTML(true);  //Set email format to HTML
       $mail->Subject = 'Verify your account';
-      $mail->Body = '<h1>Hi! 1 '.$name.'</h1> <br> 
+      $mail->Body = '<h1>Hi!</h1> <br> 
       <h5>
-        Verify your account at <a href="https://httpswhiskerwork-yhtk.me/BackEnd/verification.php?token='.$token.'">link</a>
+        This is your temporary password: <b>'.$token.'</b>
       </h5>';
       $mail->send();
       echo 'Message has been sent';

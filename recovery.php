@@ -1,9 +1,5 @@
 <?php
-//this is for sending emails for passwords, it would be an extra elemet
-include 'functions.php';
-//ini_set('display_errors', 1);
-//ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL);
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -26,8 +22,7 @@ if($user){
   $id = $user['id'];
   $email = $user['email'];
   $mail = new PHPMailer(true);
-  $mailParts = explode("@", $email);
-  $domain = end($mailParts);
+ 
   try {
     //Server settings
     $mail->SMTPDebug = SMTP::DEBUG_SERVER; //Enable verbose debug output

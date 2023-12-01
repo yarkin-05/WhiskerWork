@@ -1,5 +1,5 @@
 <?php
-include 'functions.php';
+include 'Backend/templates.php';
 
 ?>
 
