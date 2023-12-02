@@ -16,11 +16,11 @@ require '../PHPMailer-master/src/SMTP.php';
       //$mail->SMTPDebug = SMTP::DEBUG_SERVER; //Enable verbose debug output
       $mail->isSMTP();
       $mail->Host = 'mail.privateemail.com';
-      $mail->SMTPAuth= true; //Enable SMTP authentication
-      $mail->Username= 'whiskerworks@httpswhiskerwork-yhtk.me'; //SMTP username
-      $mail->Password = '5HAp8W7g4W.rE!Q';  //SMTP password
-      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //TLS encryption
-      $mail->Port = 587; //TLS port
+      $mail->SMTPAuth= true; 
+      $mail->Username= 'whiskerworks@httpswhiskerwork-yhtk.me'; 
+      $mail->Password = '5HAp8W7g4W.rE!Q';  
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; 
+      $mail->Port = 587; 
 
       //Recipients
       $mail->setFrom('whiskerworks@httpswhiskerwork-yhtk.me', 'WhiskerWorks');
@@ -34,11 +34,8 @@ require '../PHPMailer-master/src/SMTP.php';
         This is your temporary password: <b>'.$token.'</b>
       </h5>';
       $mail->send();
-      echo 'Message has been sent';
     } catch (Exception $e){
       $_SESSION['error'] = "Failed to send email: " . $mail->ErrorInfo; // Detailed error message      
-      echo $_SESSION['error'];
-      //header("Location: ../register.php"); // Redirect al register
       exit();
     }
   }

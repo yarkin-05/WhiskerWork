@@ -12,11 +12,11 @@ session_start();
     
     if (!isValidDomain($email)) {
       $_SESSION['error'] = 'Invalid email address';
-      header('Location: ../register.php');
+      echo('register.php');
       exit();
     }
   
-    $token = bin2hex(random_bytes(50)); // Temporary password
+    $token = bin2hex(random_bytes(50)); 
     $expiryTime = date('Y-m-d H:i:s', strtotime('+30 minutes')); // Expiry set to 30 minutes from now
     
     include 'mailer.php';
@@ -30,21 +30,21 @@ session_start();
     
     if ($stmt->execute($values)) {
         $id = $pdo->lastInsertId();
-        $_SESSION['info'] = array();
+        if(!isset($_SESSION['info'])) $_SESSION['info'] = array();
         $_SESSION['info']['id'] = $id;
         $_SESSION['info']['username'] = $username;
         $_SESSION['info']['email'] = $email;
-        //var_dump($id);
-    } else {
-        $errorInfo = $stmt->errorInfo();
-        var_dump($errorInfo[2]);
-        $_SESSION['error'] = 'Registration failed';
-        //echo $_SESSION['error'];
-    
-        header("Location: ../register.php");
         $stmt->closeCursor();
         $pdo = null;
         exit();
+    }else {
+      $errorInfo = $stmt->errorInfo();
+      $_SESSION['error'] = $errorInfo[2] . ' ' . $errorInfo[1];
+  
+      echo("register.php");
+      $stmt->closeCursor();
+      $pdo = null;
+      exit();
     }
   }
 
@@ -54,31 +54,42 @@ session_start();
 
     $stmt = $pdo->prepare('SELECT token, token_expiry FROM users WHERE id = ?');
 
-    $stmt->execute([$_SESSION['info']['id']]);
-    $userData = $stmt->fetch(PDO::FETCH_ASSOC);
     
-
-    if($userData){
-      $token = $userData['token'];
-      $expiry = $userData['token_expiry'];
-      $Time = date('Y-m-d H:i:s');
-      if($token === $temporary_password && $expiry >= $Time){
-        $query = $pdo->prepare('UPDATE users SET token = NULL, token_expiry = NULL WHERE id = ?');
-        $query->execute([$_SESSION['info']['id']]);
-        $_SESSION['logged'] = true;
-        $stmt->closeCursor();
-        $pdo = null;
-        exit();
-
+    if($stmt->execute([$_SESSION['info']['id']])){
+      $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+      if($userData){
+        $token = $userData['token'];
+        $expiry = $userData['token_expiry'];
+        $Time = date('Y-m-d H:i:s');
+        if($token === $temporary_password && $expiry >= $Time){
+          $query = $pdo->prepare('UPDATE users SET token = NULL, token_expiry = NULL WHERE id = ?');
+          $query->execute([$_SESSION['info']['id']]);
+          $_SESSION['logged'] = true;
+          $stmt->closeCursor();
+          $pdo = null;
+          echo('change_password.php');
+          exit();
+  
+        }else{
+          $_SESSION['error'] = 'Registration failed, temporary password is incorrect, or more than 30 minutes have passed';
+          $stmt->closeCursor();
+          $pdo = null;
+          echo('register.php');
+          exit();
+        }
       }else{
-        $_SESSION['error'] = 'Registration failed, temporary password is incorrect, or more than 30 minutes have passed';
+        $errorInfo = $stmt->errorInfo();
+        $_SESSION['error'] = $errorInfo[2] . ' ' . $errorInfo[2];
         $stmt->closeCursor();
+        echo('register.php');
         $pdo = null;
         exit();
       }
     }else{
-      $_SESSION['error'] = 'Registration failed';
+      $errorInfo = $stmt->errorInfo();
+      $_SESSION['error'] = $errorInfo[2] . ' ' . $errorInfo[2];
       $stmt->closeCursor();
+      echo('register.php');
       $pdo = null;
       exit();
     }

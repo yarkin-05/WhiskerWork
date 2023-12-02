@@ -16,8 +16,8 @@ $(document).ready(function(){
    * REGISTRATION
    */
 
-  //buttons on registration.php
-  $('#register_pt1').click(function(e){
+  //register.php
+  $('#send_verification_code').submit(function(e){
     e.preventDefault();
     e.stopPropagation();
 
@@ -40,13 +40,10 @@ $(document).ready(function(){
           'username': username,
           'email': email,
         },
-        success: function(msg){
-          console.log('server responded with: ' + msg);
-          message.text(msg);
-
+        success: function(response){
         }
-      }).fail(function(jqXHR, textStatus, errorThrown){
-        console.log('error:  + textStatus');
+      }).fail(function(response){
+        console.log(response);
       });
     }
     else{
@@ -56,7 +53,7 @@ $(document).ready(function(){
     
   });
 
-  $('#temporary_registration').click(function(event){
+  $('#verify_code').submit(function(event){
     event.preventDefault();
     event.stopPropagation();
 
@@ -74,10 +71,8 @@ $(document).ready(function(){
           'action': 'check_temporary_password',
           'temporary_password': temporary_password
         },
-        success: function(msg){
-          console.log('server responded with: ' + msg);
-          message.text(msg);
-          window.location.href = './change_password.php';
+        success: function(response){
+          window.location.href = response;
         }
       }).fail(function(msg){
         console.log('error: ' + msg);
@@ -90,7 +85,12 @@ $(document).ready(function(){
 
   }); 
 
-  //change_password.php
+ 
+  /**
+   * END OF REGISTRATION
+   *///----------------------------
+
+ //change_password.php
   $('#reset_password').submit(function(e){
     e.preventDefault();
     e.stopPropagation();
@@ -124,12 +124,6 @@ $(document).ready(function(){
       message.text('Form incomplete, please do not leave anything blank');
     }
   });
-
-
-  /**
-   * END OF REGISTRATION
-   *///----------------------------
-
 
   /******************************
   * LOGIN
