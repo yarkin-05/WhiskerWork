@@ -9,13 +9,13 @@ session_start();
 <?= template_header('Register') ?>
 <form method="POST" id="send_verification_code">
 
-  <input type='text' name='name' id='name' placeholder="Name" value='hannah'>
+  <input type='text' name='name' id='name' placeholder="Name">
 
-  <input type='text' name='last_name' id='last_name' placeholder="Last Name" value='Bang'>
+  <input type='text' name='last_name' id='last_name' placeholder="Last Name" >
 
-  <input type='text' name='username' id='username' placeholder='Username' value='hannahbang'>
+  <input type='text' name='username' id='username' placeholder='Username' >
 
-  <input type='email' name='email' id='email' placeholder='Email' value='yarkin_@outlook.com'>
+  <input type='email' name='email' id='email' placeholder='Email' >
 
   <input type='submit' value='Send Verification Code'>
 </form>

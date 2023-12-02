@@ -33,7 +33,6 @@
        * LOGIN ENDS
        */
 
-
       /**
        * Registration begins
        */
@@ -45,16 +44,10 @@
         check_temp_password($temporary_password);
         break;
 
-      case 'reset_password':
-        reset_password($password);
-        break;
       /**
        * Registration ends
        */
 
-      case 'register':
-        register($name, $last_name, $username, $email, $password);
-        break;
       
     }
     

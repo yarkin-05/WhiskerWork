@@ -85,6 +85,38 @@ $(document).ready(function(){
 
   }); 
 
+  $('#login').submit(function(event){
+
+    event.preventDefault();
+    event.stopPropagation();
+    //console.log('hi');
+    let username = $('#username').val();
+    let password = $('#password').val();
+    let message = $('#alert p'); //the alert message
+    message.text('');
+
+    if(!isEmpty(username) && !isEmpty(password)){
+
+      $.ajax({
+        url: 'BackEnd/server.php',
+        type: 'POST',
+        data:{
+          'action':'login',
+          'username': username,
+          'password': password
+        },
+        success: function(response){
+          //console.log('server responded with: ' + response);
+          window.location.href = response;
+        }
+      }).fail(function(msg){
+        console.log(msg);
+      });
+    }else{
+      message.text('Form incomplete, please do not leave anything blank');
+    }
+  });
+
  
   /**
    * END OF REGISTRATION
@@ -191,7 +223,7 @@ $(document).ready(function(){
     }
   });
 
-  //forms un recover_password.php
+  //recover_password.php
   $('#verify_token').submit(function(event){
     event.preventDefault();
     event.stopPropagation();
@@ -222,15 +254,13 @@ $(document).ready(function(){
 
 
 
-
-
   $('#send_email').click(function(event){
     e.preventDefault();
     e.stopPropagation();
     let email = $('#email').val();
 
     $.ajax({
-      url: './BackEnd/server.php',
+      url: 'BackEnd/server.php',
       type: 'POST',
       data: {
         'action':'send_verification_code',
@@ -248,67 +278,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-  $('#login_form').click(function(e){
-    e.preventDefault();
-    e.stopPropagation();
-
-    let username = $('#username').val();
-    let password = $('#password').val();
-    let message = $('#alert p'); //the alert message
-    message.text('');
-
-    if(!isEmpty(username) && !isEmpty(password)){
-
-        $.ajax({
-          url: './BackEnd/server.php',
-          type: 'POST',
-          data:{
-            'action':'login',
-            'username': username,
-            'password': password
-          },
-          success: function(msg){
-            console.log('server responded with: ' + msg);
-            message.text(msg);
-            if(msg != -1) window.location.href = 'dashboard.php';
-          }
-        }).fail(function(msg){
-          console.log(msg);
-        });
-    }else{
-      message.text('Form incomplete, please do not leave anything blank');
-    }
-  });
-
-
-
-
-  $('#recover_password').click(function(event){
-    event.preventDefault();
-    event.stopPropagation();
-    let email = $('#email').val();
-    let message = $('#alert p'); //the alert message
-    if(!isEmpty(email)){
-      $.ajax({
-        url: 'recovery.php',
-        type: 'POST',
-        data:{ 'email': email },
-        success: function(msg){
-          console.log('server responded with: ' + msg);
-          message.text(msg);
-          
-        }
-      }).fail(function(msg){
-        console.log(msg);
-      });
-    }else{
-      message.text('Please provide an email');
-    }
-    
-  })
 
   
 })

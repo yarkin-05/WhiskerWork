@@ -7,7 +7,6 @@ session_start();
    *  REGISTRATION PROCESS
    *///
 
-   //aqui se inicializa el array
   function send_verification_code($name, $last_name, $username, $email){
     
     if (!isValidDomain($email)) {
@@ -94,32 +93,6 @@ session_start();
       exit();
     }
     
-  }
-
-  function reset_password($password){
-
-    $pdo = pdo_connect_mysql();
-    $hash = password_hash($password, PASSWORD_DEFAULT); //secure password
-
-    $stmt = $pdo->prepare('UPDATE users SET password = ? WHERE id = ?');
-
-    if($stmt -> execute([$hash,$_SESSION['info']['id']])){
-      unset($_SESSION['temporary_registration']); 
-      $_SESSION['logged'] = true;
-      $stmt->closeCursor();
-      $pdo = null;
-      header('Location: ../dashboard.php');
-      exit();
-    }else{
-      $_SESSION['error'] = 'Something went wrong';
-      unset($_SESSION['info']);
-      echo $_SESSION['error'];
-      $stmt->closeCursor();
-      $pdo = null;
-     // header('Location: ../dashboard.php');
-      exit();
-    }
-
   }
 
   /**
@@ -333,13 +306,13 @@ session_start();
 
     if(!$stmt){
       $_SESSION['error'] = 'Log in error: please try again.';
-      header('Location: ../login.php');
+      echo('login.php');
       exit();
     }
     
     if(!$stmt -> execute([$username])){
       $_SESSION['error'] = 'Enter valid username';
-      header('Location: ../login.php');
+      echo('login.php');
       exit();
     }
     
@@ -347,16 +320,21 @@ session_start();
     $hashed_password = $user['password']; //password of the user
     
     if(password_verify($password, $hashed_password)){
-          //passwords match
-      $_SESSION['username'] = $username;
-      $_SESSION['password'] = $user['password'];
-      $_SESSION['id'] = $user['id'];
-      $_SESSION['email'] = $user['email'];
+      $_SESSION['info'] = array();
+      $_SESSION['info']['username'] = $username;
+      $_SESSION['info']['id'] = $user['id'];
+      $_SESSION['info']['email'] = $user['email'];
       $_SESSION['logged'] = true;
-      header('Location: ../dashboard.php'); //Redireccion al dashboard
+      $stmt->closeCursor();
+      $pdo = null;
+      echo('dashboard.php');
+      exit();
     }else{
       $_SESSION['error'] = 'Incorrect password';
-      header('Location: ../login.php');
+      $stmt->closeCursor();
+      $pdo = null;
+      echo('login.php');
+      exit();
     }
   }
 
