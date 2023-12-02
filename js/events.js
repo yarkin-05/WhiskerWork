@@ -1,7 +1,7 @@
-
 function isEmpty(str){
   return (!str || str.length === 0);
 }
+
 
 $('#togglePassword').on('click', function() {
   const passwordField = $('#password');
@@ -90,8 +90,8 @@ $(document).ready(function(){
 
   }); 
 
-  //button on change_password.php
-  $('#reset_password').click(function(e){
+  //change_password.php
+  $('#reset_password').submit(function(e){
     e.preventDefault();
     e.stopPropagation();
 
@@ -107,11 +107,12 @@ $(document).ready(function(){
           url: './Backend/server.php',
           type: 'POST',
           data:{
-            'action':'reset_password',
+            'action':'change_password',
             'password': password
           },
-          success: function(msg){
-            console.log('server responded with: ' + msg);
+          success: function(response){
+            console.log('server responded with: ' + response);
+            window.location.href = response;
           }
         }).fail(function(msg){
           console.log(msg);
@@ -130,8 +131,100 @@ $(document).ready(function(){
    *///----------------------------
 
 
+  /******************************
+  * LOGIN
+  */
 
+  //recover_username.php
+  $('#recover_username').submit(function(event){
+    event.preventDefault();
+    event.stopPropagation();
 
+    let email = $('#email').val();
+    let message = $('#alert p'); //the alert message
+    message.text('');
+
+    if(!isEmpty(email)){
+
+      $.ajax({
+        url: 'Backend/server.php',
+        type: 'POST',
+        data:{
+          'action':'recover_username',
+          'email': email
+        },
+        success: function(response){
+          //console.log(response);
+          window.location.href = response;
+        }
+      }).fail(function(msg){
+        console.log(msg);
+      });
+      
+    }else{
+      message.text('Please enter a valid email');
+    }
+  })
+
+  //recover_password.php
+  $('#send_token').submit(function(event){
+    event.preventDefault();
+    event.stopPropagation();
+
+    let email = $('#email').val();
+    let message = $('#alert p'); //the alert message
+    message.text('');
+
+    if(!isEmpty(email)){
+
+      $.ajax({
+        url: 'Backend/server.php',
+        type: 'POST',
+        data:{
+          'action':'send_password_token',
+          'email': email
+        },
+        success: function(response){
+          console.log(response);
+          window.location.href = response;
+        }
+      }).fail(function(msg){
+        console.log(msg);
+      });
+      
+    }else{
+      message.text('Please output a valid email');
+    }
+  });
+
+  //forms un recover_password.php
+  $('#verify_token').submit(function(event){
+    event.preventDefault();
+    event.stopPropagation();
+
+    let token = $('#token').val();
+    let message = $('#alert p'); //the alert message
+    message.text('');
+
+    if(!isEmpty(token)){
+
+      $.ajax({
+        url: 'Backend/server.php',
+        type: 'POST',
+        data: {
+            'action': 'verify_token',
+            'token': token
+        },
+        success: function(response) {
+          console.log(response);
+          window.location.href = response;
+        }
+      });
+    }else{
+      message.text('Please output a valid email');
+    }
+
+  });
 
 
 

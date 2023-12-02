@@ -1,33 +1,20 @@
 <?php
 include 'Backend/templates.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+include 'Backend/functions.php';
+session_start();
 
-$msg = ''; // Initialize an empty message
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $pdo = pdo_connect_mysql();
-    $stmt = $pdo->prepare('SELECT username FROM users WHERE email = ?');
-    $stmt->execute([$email]);
-    $username = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($username) {
-        $msg = $username['username'] . ' is your username'; // Access 'username' field from $username array
-    } else {
-        $msg = 'There is no account associated with that email, please enter a valid email';
-    }
-}
 ?>
 
 <?= template_header('Recover Username') ?>
-<form method='post' action='recover_username.php'>
+<form method="post" id="recover_username">
     <input type="email" name='email' placeholder="Email" id="email">
-    <input type="submit" value="Recover Username" id="recover_username">
+    <input type="submit" value="Recover Username" >
 </form>
 
-<?= $msg ?> 
+<div id='alert'>
+    <p>
 
+    </p>
+</div>
 
 <?= template_footer() ?>

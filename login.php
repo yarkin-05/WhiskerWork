@@ -1,10 +1,8 @@
 <?php
 include 'Backend/templates.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+include 'Backend/functions.php';
+session_start();
 ?>
-
 
 <?= template_header_login('Login') ?>
 <form method = "post" >
@@ -27,5 +25,12 @@ error_reporting(E_ALL);
     </p>
   </div>
 </form>
-<?= template_footer() ?>
+
+<p>
+<?= display_error();
+    unset_error();
+?>
+</p>
+
+<?= template_footer(); ?>
 

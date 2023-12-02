@@ -1,16 +1,14 @@
 <?php
 include 'Backend/templates.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+include 'Backend/functions.php';
 session_start();
 
-if(!isset($_SESSION['temporary_registration']) or !$_SESSION['temporary_registration']) header('Location: register.php');
+if(!isset($_SESSION['logged']) or !$_SESSION['logged']) header('Location: index.php');
 ?>
 
 <?= template_header('Reset Password') ?>
 
-<form method='post'>
+<form method='post' id='reset_password'>
 
   <label for="password"> Please input the new password</label>
   <input type="password" name="new_password" id="new_password">
@@ -20,7 +18,7 @@ if(!isset($_SESSION['temporary_registration']) or !$_SESSION['temporary_registra
   <input type="password" name="confirm_new_password" id="confirm_new_password">
   <i class="far fa-eye" id="togglePassword"></i>
 
-  <input type="submit" value='Reset Password' id='reset_password' >
+  <input type="submit" value='Reset Password' >
 </form>
 
 <div id='alert'>
