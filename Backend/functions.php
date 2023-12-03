@@ -3,9 +3,9 @@ session_start();
 
 function redirectIfNotLoggedIn() {
   // Check if session variables are set
-  if (!isset($_SESSION['info']['username']) || !isset($_SESSION['info']['id']) || !isset($_SESSION['logged'])) {
-      header('Location: ../welcome.php');
-      exit;
+  if (!isset($_SESSION['logged'])) {
+      header('Location: index.php');
+      exit();
   }
 }
 
