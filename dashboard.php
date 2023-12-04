@@ -67,9 +67,53 @@ $tasks = fetchTasks();
                 <p>Completed: </p>
                 <input type="checkbox" id="completed" name="completed">
               </div>
+<<<<<<< HEAD
             </div>
           </div>
         <?php endforeach; ?>
+=======
+          </div>
+          
+        </div>
+      </div>
+  
+      <div class="task--card">
+        <div class="task--header">
+          <div class="importance-level">
+            <div class="level">
+              <div class="very"></div>
+              high         
+            </div>
+              
+            <i style="color: gray;" class="bi bi-trash3-fill"></i>
+  
+          </div>
+          <div class="title"> 
+            task name
+          </div>  
+        </div>
+        <div class="description">
+          <p>description</p>
+        </div>
+        <div class="dates">
+          <div class="start-date">
+            Start Date
+            <div class="date">
+              21 Sept
+            </div>
+          </div>
+          <div class="end-date">
+            End Date
+            <div class="date">
+              30 Oct
+            </div>
+          </div>
+      </div>
+      <div class="completed">
+        <p>Completed: </p>
+         <input type="checkbox" id="completed" name="completed">
+      </div>
+>>>>>>> 6e3884c1a531ff32990e5e72c561a538308863c7
     </div>
   </div>
   

@@ -275,39 +275,30 @@ $(document).ready(function(){
 
     if(!isEmpty(task_name) && !isEmpty(start_date) && !isEmpty(end_date) && !isEmpty(description) && !isEmpty(importance)){
 
-      $.ajax({
-        url: 'Backend/servers.php',
-        method: 'POST',
-        data: {
-          'action': 'create_task',
-          'task_name': task_name,
-          'start_date' : start_date,
-          'end_date' : end_date,
-          'description' : description,
-          'importance' : importance
-        },
-        success: function(response){
-          console.log(response);
-        }
-      }).fail(function(msg){
-        console.log(msg);
-      });
+    $.ajax({
+      url: 'BackEnd/server.php',
+      type: 'POST',
+      data: {
+        'action':'send_verification_code',
+        'email': email
+      },
+      success: function(msg){
+        console.log('server responded with: ' + msg);
+        message.text(msg);
 
-
-
-    }else{
-      message.text("Field can not be blank");
-    }
-
-    
-  })
- 
+      }
+    }).fail(function(jqXHR, textStatus, errorThrown){
+      console.log('error:  + textStatus');
+    });
+  }})
+  
+});
 
 
 
 
   
-})
+
 
 /*
  let newInput = $('<input>').attr({

@@ -46,10 +46,13 @@ redirectIfNotLoggedIn();
     </form>
   </div>
 
+<<<<<<< HEAD
   <p>
     <?= display_error();
         unset_error();
     ?>
   </p>
 
+=======
+>>>>>>> 6e3884c1a531ff32990e5e72c561a538308863c7
 <?= template_footer() ?>

@@ -28,7 +28,11 @@ CREATE TABLE tasks (
     description TEXT,
     completed TINYINT DEFAULT 0,
     user_id INT,
+<<<<<<< HEAD
     importance TEXT,
+=======
+    importance ENUM('high', 'middle', 'low') DEFAULT 'low',
+>>>>>>> 6e3884c1a531ff32990e5e72c561a538308863c7
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
