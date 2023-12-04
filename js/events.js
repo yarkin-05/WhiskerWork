@@ -100,7 +100,7 @@ $(document).ready(function(){
         url: 'login.php',
         type: 'POST',
         data:{
-          'action':'login',
+          'action':'login.php',
           'username': username,
           'password': password
         },
