@@ -165,12 +165,12 @@ session_start();
 
     $values = [$token, $expiryTime, $email]; 
 
-    /** DEBUGGING ECHOS
-     * echo($stmt->queryString); 
-     * echo($token); 
-     * echo($expiryTime);
-     * echo($email);
-     */
+    //DEBUGGING ECHOS
+     echo($stmt->queryString); 
+     echo($token); 
+     echo($expiryTime);
+     echo($email);
+     
     
 
     if ($stmt->execute($values)) {
@@ -213,7 +213,10 @@ session_start();
       $db_token = $userData['token'];
       $expiry = $userData['token_expiry'];
       $Time = date('Y-m-d H:i:s');
-
+      $_SESSION['info']['id'] = $userData['id'];
+      $_SESSION['info']['username'] = $userData['username'];
+      $_SESSION['info']['name'] = $userData['name'];
+      $_SESSION['info']['last_name'] = $userData['last_name'];
       /** DEBUGGING
        *       echo($db_token. ' ');
        *       var_dump($token);
@@ -226,7 +229,7 @@ session_start();
 
         $query = $pdo->prepare('UPDATE users SET token = NULL, token_expiry = NULL WHERE email = ?');
         $query->execute([$_SESSION['info']['email']]);
-        $_SESSION['logged'] = true;
+        $_SESSION['logged'] = true;        
         $stmt->closeCursor();
         echo('change_password.php');
         exit();

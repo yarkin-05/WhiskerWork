@@ -43,6 +43,7 @@ redirectIfNotLoggedIn();
                 </div>
               </div>
           </div>
+          
         </div>
       </div>
   
@@ -77,6 +78,10 @@ redirectIfNotLoggedIn();
               30 Oct
             </div>
           </div>
+      </div>
+      <div class="completed">
+        <p>Completed: </p>
+         <input type="checkbox" id="completed" name="completed">
       </div>
     </div>
   </div>

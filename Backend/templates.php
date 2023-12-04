@@ -30,6 +30,12 @@ function template_header($title, $page_name){
             </a>
           </li>
           <li>
+            <a href="create_task.php">
+              <i class="bi bi-plus-circle"></i>
+              <span> Create task </span>
+            </a>
+          </li>
+          <li>
             <a href="profile.php">
               <i class="bi bi-person-circle"></i>
               <span>Profile</span>
@@ -45,6 +51,12 @@ function template_header($title, $page_name){
             <a href="workspace.php">
               <i class="bi bi-person-workspace"></i>
               <span>Workspace</span>
+            </a>
+          </li>
+          <li>
+            <a href="dashboard.php">
+            <i class="bi bi-table"></i>              
+            <span>Dashboard</span>
             </a>
           </li>
           <li class="register">
