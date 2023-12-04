@@ -135,7 +135,7 @@ $(document).ready(function(){
 
       if(password === confirm){
         $.ajax({
-          url: './Backend/server.php',
+          url: 'Backend/servers.php',
           type: 'POST',
           data:{
             'action':'change_password',
@@ -172,7 +172,7 @@ $(document).ready(function(){
     if(!isEmpty(email)){
 
       $.ajax({
-        url: 'Backend/server.php',
+        url: 'Backend/servers.php',
         type: 'POST',
         data:{
           'action':'recover_username',
@@ -204,7 +204,7 @@ $(document).ready(function(){
     if(!isEmpty(email)){
 
       $.ajax({
-        url: 'Backend/server.php',
+        url: 'Backend/servers.php',
         type: 'POST',
         data:{
           'action':'send_password_token',

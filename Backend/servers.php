@@ -49,7 +49,12 @@
 
       /**
        * Registration ends
-       */
+       */ 
+
+       case 'create_task':
+        create_task($task_name, $start_date, $end_date, $description, $importance);
+        break;
+
 
       
       
