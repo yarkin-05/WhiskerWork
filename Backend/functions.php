@@ -10,8 +10,8 @@ function redirectIfNotLoggedIn() {
 }
 
 function logged(){
-  if(isset($_SESSION['logged']) and $_SESSION['logged'] === true){
-    header('Location: ../dashboard.php');
+  if(isset($_SESSION['logged'])){
+    header('Location: dashboard.php');
   }
 }
 

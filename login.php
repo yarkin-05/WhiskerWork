@@ -2,34 +2,41 @@
 include 'Backend/templates.php';
 include 'Backend/functions.php';
 session_start();
+logged();
 ?>
 
-<?= template_header_login('Login') ?>
-<form id='login' method ="post">
+<?= template_header('Login', 'Login') ?>
 
-  <input type='text' name='username' id='username' placeholder='Username'>
 
-  <p>Forgot username? Retrieve it <a href="recover_username.php"> here</a> 
-  </p>  
+  <div class="form">
+    <form id='login' method ="post">
 
-  <input type='password' name='password' id='password' placeholder="Password">
-  <i class="far fa-eye" id="togglePassword"></i>
+      <input type='text' name='username' id='username' placeholder='Username'>
 
-  <input type='submit' value="Submit">
-  
-  <a href="recover_password.php">Forgot password?</a>
+      <p>Forgot username? Retrieve it <a href="recover_username.php"> here</a> 
+      </p>  
+      
+      <div class="password">
+        <input type='password' name='password' id='password' placeholder="Password">
+        <i class="far fa-eye" id="togglePassword"></i>
+      </div>
 
-  <div id='alert'>
-    <p>
-    </p>
+      <a href="recover_password.php">Forgot password?</a>
+
+      <input type='submit' value="Submit">
+
+      <div id='alert'>
+        <p>
+        </p>
+      </div>
+    </form>
   </div>
-</form>
 
-<p>
-<?= display_error();
-    unset_error();
-?>
-</p>
+  <p class="server-error">
+  <?= display_error();
+      unset_error();
+  ?>
+  </p>
 
 <?= template_footer() ?>
 

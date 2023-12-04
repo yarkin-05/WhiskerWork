@@ -29,7 +29,7 @@ body{
   background-color:rgb(168, 137, 147);
 }
 .sidebar:hover{
-  width: 300px;
+  width: 350px;
   transition: 0.5s;
 }
 
@@ -121,6 +121,7 @@ body{
   padding: 1rem;
 }
 
+
 .header--wrapper img{
   width: 50px;
   height: 50px;
@@ -175,10 +176,69 @@ body{
 }
 
 
+/* FORMS ********************************/
 
+.main--content .form{
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  padding-top: 30px;
+  margin-bottom: 20px;
+}
+
+.main--content form{
+  display: block;
+}
+
+.main--content form a{
+  display: block;
+}
+
+.form form input[type=text],
+.form form input[type=email],
+.form form input[type=password]{
+  display: block;
+  margin: 15px 0;
+  border-bottom: #767676;
+  font-size: 17px;
+}
+
+.form form input[type=submit]{
+  padding: 1rem;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: rgb(151, 112, 125);
+  color: #fff;
+}
+
+.form form input[type=submit]:hover{
+  background-color: rgb(123, 85, 98);
+}
+
+.form form label{
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(168, 137, 147);
+}
+
+.form form .password{
+  display: flex;
+  align-items: center;
+}
+
+#alert{
+  padding: 20px 0px;
+  color: #fc6470;
+}
+
+#code_verification{
+  padding: 20px 0px;
+  color: #fc6470;
+}
 /*
 * TASK CONTAINER *********************************************
 */
+
 .task--container{
   background-color: #fff;
   padding: 2rem;
@@ -194,11 +254,11 @@ body{
   gap: 1rem;
 }
 
-.task--container .main--title{
-  color: rgba(113, 99, 186, 255);
+.main--title{
+  color: rgb(168, 137, 147);
   padding-bottom: 10px;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .task--card{
@@ -395,10 +455,13 @@ body{
 /* CALENDAR *****************************************/
 
 .wrapper{
-  width: 450px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
   height: min-content;
   background-color: #fff;
-  border-radius: 50px;
+  border-radius: 15px;
   display: block;
 }
 

@@ -30,9 +30,9 @@ require '../PHPMailer-master/src/SMTP.php';
       $mail->isHTML(true);  //Set email format to HTML
       $mail->Subject = 'Verify your account';
       $mail->Body = '<h1>Hi!</h1> <br> 
-      <h5>
-        This is your temporary password: <b>'.$token.'</b>
-      </h5>';
+      <h3>
+        This is your verification code, please enter this code where it says user code: <br> <b>'.$token.'</b>
+      </h3>';
       $mail->send();
     } catch (Exception $e){
       $_SESSION['error'] = "Failed to send email: " . $mail->ErrorInfo; // Detailed error message      

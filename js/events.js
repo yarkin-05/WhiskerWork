@@ -47,7 +47,7 @@ $(document).ready(function(){
       });
     }
     else{
-      message.text('Passwords do not match');
+      message.text('Input can not be blank');
     }
 
     
@@ -59,7 +59,7 @@ $(document).ready(function(){
 
     let temporary_password = $('#temporary_password').val();
 
-    let message = $('#alert p'); //the alert message
+    let message = $('#code_verification p'); //the alert message
     message.text('');
 
     if(!isEmpty(temporary_password)){
@@ -230,6 +230,8 @@ $(document).ready(function(){
 
     let token = $('#token').val();
     let message = $('#alert p'); //the alert message
+    let mess = $('#code_verification')
+    message.text('');
     message.text('');
 
     if(!isEmpty(token)){
@@ -248,6 +250,7 @@ $(document).ready(function(){
       });
     }else{
       message.text('Please output a valid email');
+      mess.text('Token can not be blank');
     }
 
   });
