@@ -1,37 +1,55 @@
 <?php
 include 'Backend/templates.php';
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
+include 'Backend/functions.php';
 session_start();
+
 redirectIfNotLoggedIn();
 ?>
 
-<?=template_header_login('Create task') ?>
-<form method='post'>
-  <div style='display: flex; flex-direction: column;'>
-    <input type='text' placeholder='Name of the Task' id='name_task'>
-    <input type="date" placeholder='Start date' id='start_date'>
-    <input type="date" placeholder='End date' id='end_date'>
-    <input type="text" placeholder='Description' id='description'>
-    <button id='add_todo'>
-      <i class="bi bi-plus-circle"> Add to-do</i>
-    </button>
-    <div id='to-dos'>
+<?=template_header('Create task', 'Create Task') ?>
 
-    </div>
-    <input type='submit' value='Add task'>
+  <div class="form-create">
+    <form method='post' id="create_task">
+        <label for="task_name">Task Name:</label>
+        <input type="text" id="task_name" name="task_name" required>
+
+        <div class="dates">
+          <div class="date">
+          <label for="start_date">Start Date:</label>
+          <input type="date" id="start_date" name="start_date">
+
+          </div>
+          <div class="date">
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date">
+          </div>
+        </div>
+        
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" cols="50"></textarea>
+
+        <label for="importance">Importance:</label>
+        <select id="importance" name="importance">
+            <option value="high">High</option>
+            <option value="middle">Middle</option>
+            <option value="low">Low</option>
+        </select>
+
+        <input type="submit" value="Create task">
+
+      <div id="alert">
+        <p>
+
+        </p>
+      </div>
+    </form>
   </div>
 
-  
-
-
-</form>
-<div id='nomas'>
   <p>
-
+    <?= display_error();
+        unset_error();
+    ?>
   </p>
-</div>
 
 <?= template_footer() ?>

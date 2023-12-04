@@ -22,7 +22,7 @@ function pdo_connect_mysql(){
   }
 }
 
-function fetchTasks(){
+function fetchTask(){
   $pdo = pdo_connect_mysql();
   $stmt = $pdo -> query('SELECT * FROM gant');
   $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
@@ -32,7 +32,7 @@ function fetchTasks(){
   return $result;
 }
 
-$tasks = fetchTasks();
+$tasks = fetchTask();
 $msg = $tasks;
 
 ?>

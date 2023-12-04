@@ -1,5 +1,17 @@
 <?php
+include 'db.php';
 session_start();
+
+function fetchTasks(){
+  $pdo = pdo_connect_mysql();
+  $stmt = $pdo -> prepare('SELECT * FROM tasks WHERE user_id = ?');
+  $stmt->execute([$_SESSION['info']['id']]);
+  $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+  if ($result === false){
+    return [];
+  }
+  return $result;
+}
 
 function redirectIfNotLoggedIn() {
   // Check if session variables are set

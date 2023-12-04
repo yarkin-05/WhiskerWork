@@ -1,6 +1,9 @@
 <?php
 include 'db.php'; //incluye la base de datos
 include 'functions.php'; //incluye algunas funciones de apoyo
+ini_set('display_errors', 1);
+  ini_set('display_startup_errors', 1);
+  error_reporting(E_ALL);
 session_start();
 
   /** ------------------------------------
@@ -165,12 +168,12 @@ session_start();
 
     $values = [$token, $expiryTime, $email]; 
 
-    /** DEBUGGING ECHOS
-     * echo($stmt->queryString); 
-     * echo($token); 
-     * echo($expiryTime);
-     * echo($email);
-     */
+    //DEBUGGING ECHOS
+     echo($stmt->queryString); 
+     echo($token); 
+     echo($expiryTime);
+     echo($email);
+     
     
 
     if ($stmt->execute($values)) {
@@ -213,7 +216,10 @@ session_start();
       $db_token = $userData['token'];
       $expiry = $userData['token_expiry'];
       $Time = date('Y-m-d H:i:s');
-
+      $_SESSION['info']['id'] = $userData['id'];
+      $_SESSION['info']['username'] = $userData['username'];
+      $_SESSION['info']['name'] = $userData['name'];
+      $_SESSION['info']['last_name'] = $userData['last_name'];
       /** DEBUGGING
        *       echo($db_token. ' ');
        *       var_dump($token);
@@ -226,7 +232,7 @@ session_start();
 
         $query = $pdo->prepare('UPDATE users SET token = NULL, token_expiry = NULL WHERE email = ?');
         $query->execute([$_SESSION['info']['email']]);
-        $_SESSION['logged'] = true;
+        $_SESSION['logged'] = true;        
         $stmt->closeCursor();
         echo('change_password.php');
         exit();
@@ -341,6 +347,57 @@ session_start();
   /** --------------------
    * END OF LOGIN 
    */// ---------------
+
+   /**
+    * CREATING TASKSSSS
+    */
+
+    function create_task($task_name, $start, $end, $description, $importance){
+
+     
+      /* Debug logs
+        echo $start_date;
+        echo "Formatted Date: " . $formattedStartDate;
+        echo "Formatted Date: " . $formattedEndDate;
+      */
+
+      $start_date = DateTime::createFromFormat('Y-m-d', $start);
+      $end_date = DateTime::createFromFormat('Y-m-d', $end);
+
+      if ($start_date !== false and $end_date !== false) {
+        //dates are valid
+        $formattedStartDate = $start_date->format('Y-m-d'); 
+        $formattedEndDate = $end_date->format('Y-m-d');
+        echo $importance;
+        $pdo = pdo_connect_mysql();
+        $stmt = $pdo->prepare('INSERT INTO tasks (name, start_date, end_date, description, user_id, importance) VALUES (?,?,?,?,?,?)');
+
+        //echo $stmt;
+        $values = [$task_name, $formattedStartDate, $formattedEndDate, $description, $_SESSION['info']['id'], $importance];
+
+
+        $task = $stmt->execute($values);
+
+        if($task){
+          echo 'valid!';
+        }else{
+          $errorInfo = $stmt->errorInfo();
+          $_SESSION['error'] = $errorInfo[2] . ' ' . $errorInfo[1];
+          $stmt->closeCursor();
+          $pdo = null;
+          echo('create_task.php');
+          exit();
+        }
+
+        //$date_query = $pdo->prepare('INSERT INTO dates');
+        
+      } else {
+        $_SESSION['error'] = 'Invalid date';
+        echo('create_task.php');
+        exit();
+      }
+
+    }
 
   function register($name, $last_name, $username, $email, $password){
 

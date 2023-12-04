@@ -13,10 +13,9 @@ $('#togglePassword').on('click', function() {
 $(document).ready(function(){
 
   /***************************************
-   * REGISTRATION
+   * user registration and login
    */
 
-  //register.php
   $('#send_verification_code').submit(function(e){
     e.preventDefault();
     e.stopPropagation();
@@ -98,7 +97,7 @@ $(document).ready(function(){
     if(!isEmpty(username) && !isEmpty(password)){
 
       $.ajax({
-        url: 'BackEnd/server.php',
+        url: 'BackEnd/servers.php',
         type: 'POST',
         data:{
           'action':'login',
@@ -201,6 +200,7 @@ $(document).ready(function(){
     let message = $('#alert p'); //the alert message
     message.text('');
 
+    
     if(!isEmpty(email)){
 
       $.ajax({
@@ -212,7 +212,7 @@ $(document).ready(function(){
         },
         success: function(response){
           console.log(response);
-          window.location.href = response;
+          //window.location.href = response;
         }
       }).fail(function(msg){
         console.log(msg);
@@ -230,7 +230,7 @@ $(document).ready(function(){
 
     let token = $('#token').val();
     let message = $('#alert p'); //the alert message
-    let mess = $('#code_verification')
+    let mess = $('#code_verification p')
     message.text('');
     message.text('');
 
@@ -256,28 +256,52 @@ $(document).ready(function(){
   });
 
 
+  /**
+   * USER REGISTRATION AND LOGIN DONE
+   */
 
-  $('#send_email').click(function(event){
-    e.preventDefault();
-    e.stopPropagation();
-    let email = $('#email').val();
 
-    $.ajax({
-      url: 'BackEnd/server.php',
-      type: 'POST',
-      data: {
-        'action':'send_verification_code',
-        'email': email
-      },
-      success: function(msg){
-        console.log('server responded with: ' + msg);
-        message.text(msg);
+  $('#create_task').submit(function(event){
+    event.preventDefault();
+    event.stopPropagation();
 
-      }
-    }).fail(function(jqXHR, textStatus, errorThrown){
-      console.log('error:  + textStatus');
-    });
-  });
+    let task_name = $('#task_name').val(),
+    start_date = $('#start_date').val(),
+    end_date = $('#end_date').val(),
+    description = $('#description').val()
+    importance = $('#importance').val(),
+    message = $('#alert p');
+    message.text("");
+
+    if(!isEmpty(task_name) && !isEmpty(start_date) && !isEmpty(end_date) && !isEmpty(description) && !isEmpty(importance)){
+
+      $.ajax({
+        url: 'Backend/servers.php',
+        method: 'POST',
+        data: {
+          'action': 'create_task',
+          'task_name': task_name,
+          'start_date' : start_date,
+          'end_date' : end_date,
+          'description' : description,
+          'importance' : importance
+        },
+        success: function(response){
+          console.log(response);
+        }
+      }).fail(function(msg){
+        console.log(msg);
+      });
+
+
+
+    }else{
+      message.text("Field can not be blank");
+    }
+
+    
+  })
+ 
 
 
 

@@ -3,7 +3,6 @@ include 'Backend/templates.php';
 include 'Backend/functions.php';
 session_start();
 
-logged();
 ?>
 
 <?= template_header('Reset Password', 'Reset Password') ?>

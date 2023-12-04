@@ -77,6 +77,7 @@ require '../PHPMailer-master/src/SMTP.php';
     try {
 
       //Server settings
+      //$mail->SMTPDebug = SMTP::DEBUG_SERVER; //Enable verbose debug output
       $mail->isSMTP();
       $mail->Host = 'mail.privateemail.com';
       $mail->SMTPAuth= true; 
@@ -97,11 +98,10 @@ require '../PHPMailer-master/src/SMTP.php';
         This is your token for password recovery: <b>'.$token.'</b>, mind that this token will no longer be valid after 30 minutes
       </h3>';
       $mail->send();
-
+      echo 'message sent!';
     } catch (Exception $e){
-      $_SESSION['error'] = "Failed to send email: " . $mail->ErrorInfo; // Detailed error message      
-      echo $_SESSION['error'];
-      exit();
+      $_SESSION['error'] = "Failed to send email: " . $mail->ErrorInfo; // Detailed error message   
+      echo 'login.php';   
     }
   }
 

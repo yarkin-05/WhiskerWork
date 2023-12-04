@@ -47,7 +47,7 @@ body{
 }
 
 .menu li{
-  padding: 1rem;
+  padding: 10px;
   margin: 8px 0;
   border-radius: 8px;
   transition: all 0.5s ease-in-out;
@@ -235,6 +235,79 @@ body{
   padding: 20px 0px;
   color: #fc6470;
 }
+
+/*
+*  FORM CREATE --------------------------------
+*/
+
+.main--content .form-create{
+  background-color: white;
+  border-radius: 15px;
+  padding: 2rem;
+  padding-top: 30px;
+  margin-bottom: 20px;
+}
+
+.form-create form input, .form-create form select{
+  margin: 2rem 0;
+}
+
+.form-create form input[type=text],
+.form-create form input[type=email]{
+  display: block;
+  width: 100%;
+  font-size: 15px;
+  border-bottom: #767676 1px solid;
+}
+
+.form-create form .dates{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.form-create form input[type=date]{
+  display: block;
+  margin: 15px 0;
+  font-size: 17px;
+}
+
+.form-create form textarea{
+  display: block;
+  width: 100%;
+  border: 1px solid #767676;
+  border-radius: 15px;
+  font-size: 12px;
+  padding: 1rem;
+}
+
+.form-create form input[type=submit]{
+  display: block;
+  padding: 1rem;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: rgb(151, 112, 125);
+  color: #fff;
+}
+
+.form-create form input[type=submit]:hover{
+  background-color: rgb(123, 85, 98);
+}
+
+.form-create form label{
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(168, 137, 147);
+}
+
+.form-create form .password{
+  display: flex;
+  align-items: center;
+}
+
+
+
 /*
 * TASK CONTAINER *********************************************
 */
@@ -303,6 +376,18 @@ body{
   padding: 5px;
 }
 
+.task--header .importance-level i{
+  color: gray;
+  font-size: 15px;
+  cursor: pointer;
+  scale: 1;
+  transition: scale 0.5s ease-in-out;
+}
+
+.task--header .importance-level i:hover{
+  scale: 1.2;
+}
+
 .task--header .title{
   font-size: 17px;
   font-weight: 400;
@@ -333,6 +418,23 @@ body{
   font-weight: light;
 }
 
+.task--card .completed{
+  display: flex;
+  color: gray;
+  font-size: 15px;
+  gap: 1rem;
+  align-items: center;
+}
+
+.task--card .completed input{
+  scale: 1;
+  transition: scale 0.5s ease-in-out;
+}
+
+.task--card .completed input:hover{
+  transition: 1.2;
+}
+
 /* ******************TABULAR WRAPPER SECTION */
 
 .tabular--wrapper{
@@ -344,7 +446,6 @@ body{
 
 .table-container{
   width: 100%;
-
 }
 
 .table-container table{
@@ -433,19 +534,19 @@ body{
   font-size: 20px;
 }
 
-.very {
+.high {
   background-color: #fc6470; /* Red */
   border-radius: 50%;
   padding: 7px;
 }
 
-.so-so {
+.medium {
   background-color: #FFD700; /* Yellow */
   border-radius: 50%;
   padding: 7px;
 }
 
-.little {
+.low {
   background-color: #98FB98; /* Green */
   border-radius: 50%;
   padding: 7px;

@@ -11,16 +11,24 @@ CREATE TABLE users (
     creation DATE 
 );
 
+CREATE TABLE dates{
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    task_id INT,
+    start_date DATE,
+    end_date DATE,
+    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
+}
+
 -- Task Table
-CREATE TABLE Tasks (
+CREATE TABLE tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     start_date DATE,
     end_date DATE,
     description TEXT,
-    progress_bar INT DEFAULT 0,
+    completed TINYINT DEFAULT 0,
     user_id INT,
-    notification TINYINT DEFAULT 0,
+    importance TEXT,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
