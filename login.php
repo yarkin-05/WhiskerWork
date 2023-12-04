@@ -1,30 +1,10 @@
 <?php
 include 'Backend/templates.php';
 include 'Backend/functions.php';
-include 'Backend/administrator.php';
 
 
 session_start();
 logged();
-
-if(isset($_POST)){
-  if(isset($_POST['username']) && isset($_POST['password'])){
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    if(!empty($username) && !empty($password)){
-      if(login($username, $password)){
-        $_SESSION['username'] = $username;
-        //header('Location: index.php');
-      }else{
-        $_SESSION['error'] = 'Invalid username or password';
-      }
-   
-    }else{
-      $_SESSION['error'] = 'Please fill in all fields';
-    }
-  }
-}
 
 ?>
 
