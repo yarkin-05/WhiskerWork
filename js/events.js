@@ -30,7 +30,7 @@ $(document).ready(function(){
     if(!isEmpty(name) && !isEmpty(last_name) && !isEmpty(username) && !isEmpty(email)){
 
       $.ajax({
-        url: './BackEnd/server.php',
+        url: 'BackEnd/servers.php',
         type: 'POST',
         data:{
           'action':'send_verification_code',
@@ -64,7 +64,7 @@ $(document).ready(function(){
     if(!isEmpty(temporary_password)){
 
       $.ajax({
-        url: './BackEnd/server.php',
+        url: 'BackEnd/servers.php',
         type: 'POST',
         data:{
           'action': 'check_temporary_password',
@@ -97,7 +97,7 @@ $(document).ready(function(){
     if(!isEmpty(username) && !isEmpty(password)){
 
       $.ajax({
-        url: 'BackEnd/servers.php',
+        url: 'login.php',
         type: 'POST',
         data:{
           'action':'login',
