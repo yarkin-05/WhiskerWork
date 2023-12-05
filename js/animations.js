@@ -3,7 +3,7 @@ function getRandomInt(){
   return Math.floor(Math.random() * 5);
 }
 
-let img = ['images/monedas/blanco.png', 'images/monedas/gris.png', 'images/monedas/naranja.png', 'images/monedas/negro.png', 'images/monedas/siames.png'];
+let img = ['images/monedas/blanco.png', 'images/monedas/gris.png', 'images/monedas/naranja.png', 'images/monedas/negro_.png', 'images/monedas/siames.png'];
 
 function openPopup() {
   // Create a new window for the popup
