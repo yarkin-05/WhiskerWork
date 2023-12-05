@@ -1,12 +1,14 @@
 <?php
 include 'Backend/templates.php';
 include 'Backend/functions.php';
-session_start();
+@session_start();
 
 redirectIfNotLoggedIn();
+$img = fetchImg();
+
 ?>
 
-<?=template_header('Create task', 'Create Task') ?>
+<?=template_header('Create task', 'Create Task', $img) ?>
 
   <div class="form-create">
     <form method='post' id="create_task">
@@ -46,13 +48,10 @@ redirectIfNotLoggedIn();
     </form>
   </div>
 
-<<<<<<< HEAD
   <p>
     <?= display_error();
         unset_error();
     ?>
   </p>
 
-=======
->>>>>>> 6e3884c1a531ff32990e5e72c561a538308863c7
 <?= template_footer() ?>

@@ -2,30 +2,15 @@
 include 'Backend/templates.php';
 include 'Backend/functions.php';
 
-/*
-<?php foreach($task as $key => $value ):?>
-  <?php if($key ===' importance' ) :?>
-
-  <?php elseif($key === 'name') :?>
-
-  <?php elseif ($key === 'description') :?>
-
-  <?php elseif ($key === 'start_date') :?>
-
-  <?php elseif ($key === 'end_date') : ?>
-
-  <?php elseif ($key === 'completed') : ?>
-
-
-  <?php endif; ?>
-*/
-session_start();
-//redirectIfNotLoggedIn();
+@session_start();
+redirectIfNotLoggedIn();
 
 $tasks = fetchTasks();
+$img = fetchImg();
+
 ?>
 
-<?= template_header('Dashboard', 'Dashboard') ?>
+<?= template_header('Dashboard', 'Dashboard', $img) ?>
 
 <div class="task-wrapper">
       <div class="task--container">
@@ -36,12 +21,20 @@ $tasks = fetchTasks();
                 <div class="importance-level">
                   <div class="level">
                     <?= $task['importance'] ?>
-                      <div class="<?php trim($task['importance']) ?>"></div>
+                      <div class="<?php echo trim($task['importance']) ?>"></div>
                   </div>
-                  <i style="color: gray;" class="bi bi-trash3-fill"></i>
+                  <div class="icons">
+                    <?php if($task['completed'] == '0') :?>
+                      <i class="bi bi-check-lg check" id="<?= $task['id']?>" ></i>
+                      <i class="bi bi-trash3-fill" id="<?= $task['id']?>"> </i>
+                    <?php else :?>
+                      <i class="bi bi-trash3-fill" id="<?= $task['id']?>" ></i>
+                      <?php endif; ?>
+                  </div>
+                  
                 </div>
                 <div class="title"> 
-                  <?= $task['title'] ?>
+                  <?= $task['name'] ?>
                 </div>  
               </div>
               <div class="description">
@@ -63,57 +56,10 @@ $tasks = fetchTasks();
                   </div>
                 </div>
               </div>
-              <div class="completed">
-                <p>Completed: </p>
-                <input type="checkbox" id="completed" name="completed">
-              </div>
-<<<<<<< HEAD
+              
             </div>
           </div>
         <?php endforeach; ?>
-=======
-          </div>
-          
-        </div>
-      </div>
-  
-      <div class="task--card">
-        <div class="task--header">
-          <div class="importance-level">
-            <div class="level">
-              <div class="very"></div>
-              high         
-            </div>
-              
-            <i style="color: gray;" class="bi bi-trash3-fill"></i>
-  
-          </div>
-          <div class="title"> 
-            task name
-          </div>  
-        </div>
-        <div class="description">
-          <p>description</p>
-        </div>
-        <div class="dates">
-          <div class="start-date">
-            Start Date
-            <div class="date">
-              21 Sept
-            </div>
-          </div>
-          <div class="end-date">
-            End Date
-            <div class="date">
-              30 Oct
-            </div>
-          </div>
-      </div>
-      <div class="completed">
-        <p>Completed: </p>
-         <input type="checkbox" id="completed" name="completed">
-      </div>
->>>>>>> 6e3884c1a531ff32990e5e72c561a538308863c7
     </div>
   </div>
   
@@ -127,41 +73,37 @@ $tasks = fetchTasks();
         <thead>
           <tr>
             <th>Name</th>
-            <th>Completed</th>
+            <th>Importance</th>
             <th>Start</th>
             <th>Deadline</th>
-            <th>Importance</th>
+            <th>Completed</th>
           </tr>
         </thead>
         <tbody>
-          <?php foreach ($tasks as $task) :?>
-            <tr>
-              <?php foreach ($task as $key => $value) :?>
-                <?php if($key ==='name' ) :?>
-                  <td><?=$value?></td>
-                <?php elseif($key === 'importance') :?>
-                  <td><?=$value?></td>
-                <?php elseif ($key === 'start_date') :?>
-                  <td><?=$value?></td>
+        <?php foreach ($tasks as $task) :?>
+          <tr>
+              <td><?= $task['name'] ?></td>
+              <td><?= $task['importance'] ?></td>
+              <td><?= $task['start_date'] ?></td>
+              <td><?= $task['end_date'] ?></td>
 
-                <?php elseif ($key === 'end_date') : ?>
-                  <td><?=$value?></td>
-
-                <?php elseif ($key === 'completed') : ?>
-                  <?php if ($value == '0'):?>
-                    <td> No </td>
-                  <?php else : ?>
-                    <td> Yes </td>
-                  <?php endif; ?>
-                <?php endif; ?>
-               
-              <?php endforeach ;?>
-            </tr>
-          <?php endforeach ;?>
+              <?php if($task['completed'] === '1') :?>
+                <td>Yes</td>
+              <?php else :?>
+                <td>No</td>
+              <?php endif; ?>
+          </tr>
+        <?php endforeach; ?>
         </tbody>
         </th>
       </table>
     </div>
+
+  <p>
+    <?= display_error();
+        unset_error();
+    ?>
+  </p>
 <?= template_footer()?>
 
 <!-- 

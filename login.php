@@ -1,14 +1,13 @@
 <?php
 include 'Backend/templates.php';
 include 'Backend/functions.php';
-
-
-session_start();
+@session_start();
 logged();
+$img = fetchImg();
 
 ?>
 
-<?= template_header('Login', 'Login') ?>
+<?= template_header('Login', 'Login', $img) ?>
 
 
   <div class="form">

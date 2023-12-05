@@ -1,5 +1,7 @@
 <?php
-function template_header($title, $page_name){
+
+@session_start();
+function template_header($title, $page_name, $img){
   echo <<<EOT
   <!DOCTYPE html>
   <html lang="en">
@@ -98,7 +100,8 @@ function template_header($title, $page_name){
             <i class="bi bi-search"></i>
             <input type="text" placeholder="Search">
           </div>
-          <img src="./images/no_profile.png" alt="">
+          
+          <img src="$img" alt="">
         </div>
     </div>
   EOT;
@@ -114,7 +117,6 @@ function template_footer(){
 
 
   <script src="./js/events.js" ></script>
-  <script src="./js/todo.js"></script>
   <script src="./js/animations.js"></script>
   </body>
   </html>

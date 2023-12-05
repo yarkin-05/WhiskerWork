@@ -64,7 +64,7 @@ $(document).ready(function(){
     if(!isEmpty(temporary_password)){
 
       $.ajax({
-        url: 'BackEnd/servers.php',
+        url: './BackEnd/servers.php',
         type: 'POST',
         data:{
           'action': 'check_temporary_password',
@@ -100,7 +100,7 @@ $(document).ready(function(){
         url: 'BackEnd/servers.php',
         type: 'POST',
         data:{
-          'action':'login.php',
+          'action':'login',
           'username': username,
           'password': password
         },
@@ -237,7 +237,7 @@ $(document).ready(function(){
     if(!isEmpty(token)){
 
       $.ajax({
-        url: 'Backend/server.php',
+        url: 'Backend/servers.php',
         type: 'POST',
         data: {
             'action': 'verify_token',
@@ -276,22 +276,74 @@ $(document).ready(function(){
     if(!isEmpty(task_name) && !isEmpty(start_date) && !isEmpty(end_date) && !isEmpty(description) && !isEmpty(importance)){
 
     $.ajax({
-      url: 'BackEnd/server.php',
+      url: 'Backend/servers.php',
       type: 'POST',
       data: {
-        'action':'send_verification_code',
-        'email': email
+        'action':'create_task',
+        'task_name': task_name,
+        'start_date': start_date,
+        'end_date': end_date,
+        'description': description,
+        'importance': importance
       },
       success: function(msg){
-        console.log('server responded with: ' + msg);
-        message.text(msg);
-
+        window.location.href = msg;
       }
     }).fail(function(jqXHR, textStatus, errorThrown){
       console.log('error:  + textStatus');
     });
   }})
   
+  $('.bi.bi-check-lg.check').on('click', function(event){
+
+    
+    let id = $(this).attr('id');
+    console.log(id);
+    let message = $('#alert p');
+    message.text("");
+
+    $.ajax({
+      url: 'Backend/servers.php',
+      type: 'POST',
+      data: {
+        'action':'complete_task',
+        'id': id
+      },
+      success: function(msg){
+        if(msg === 'success'){
+          openPopup();
+        }
+        else{
+          message.text(msg);
+        }
+      }
+    }).fail(function(jqXHR, textStatus, errorThrown){
+      console.log('error:  + textStatus');
+    });
+  });
+
+  $('.bi.bi-trash3-fill').on('click', function(event){
+
+    
+    let id = $(this).attr('id');
+    console.log(id);
+    let message = $('#alert p');
+    message.text("");
+
+    $.ajax({
+      url: 'Backend/servers.php',
+      type: 'POST',
+      data: {
+        'action':'delete_task',
+        'id': id
+      },
+      success: function(msg){
+        window.location.href = msg;
+      }
+    }).fail(function(jqXHR, textStatus, errorThrown){
+      console.log('error:  + textStatus');
+    });
+  });
 });
 
 

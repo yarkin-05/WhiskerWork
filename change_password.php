@@ -1,11 +1,13 @@
 <?php
 include 'Backend/templates.php';
 include 'Backend/functions.php';
-session_start();
+@session_start();
+
+$img = fetchImg();
 
 ?>
 
-<?= template_header('Reset Password', 'Reset Password') ?>
+<?= template_header('Reset Password', 'Reset Password', $img) ?>
 
   <div class="form">
     <form method='post' id='reset_password'>

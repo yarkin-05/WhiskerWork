@@ -1,36 +1,46 @@
-// Function to toggle the submenu visibility
-let subMenu = document.getElementById("subMenu");
-function toggleMenu() {
-  subMenu.classList.toggle("open-menu");
+
+function getRandomInt(){
+  return Math.floor(Math.random() * 5);
 }
 
-// Function to toggle visibility of "Hi" and "Bye" based on selected reward
-let galleryOption = document.getElementById("gallery_option");
-let coinsOption = document.getElementById("coins_option");
-let gallery = document.getElementById("gallery");
-let coins = document.getElementById("coins");
+let img = ['images/monedas/blanco.png', 'images/monedas/gris.png', 'images/monedas/naranja.png', 'images/monedas/negro.png', 'images/monedas/siames.png'];
 
-function toggleVisibility() {
-  gallery.classList.toggle("visible", galleryOption.classList.contains("selected"));
-  coins.classList.toggle("visible", coinsOption.classList.contains("selected"));
-  gallery.classList.toggle("invisible", galleryOption.classList.contains("not-selected"));
-  coins.classList.toggle("invisible", coinsOption.classList.contains("not-selected"));
+function openPopup() {
+  // Create a new window for the popup
+  var pop_up = window.open("", "popup", "width=200,height=200");
+
+  let image = img[getRandomInt()];
+
+  console.log('hi');
+  // Write the content into the popup window
+  pop_up.document.write(`
+    <html>
+    <head>
+      <title>Popup</title>
+      <link rel="stylesheet" href="styles/dashboard.css">
+
+    </head>
+    <body>
+      <div class="pop-up">
+        <div class="pop-up__content">
+          <div class="pop-up__title">A coin just dropped!</div>
+          <div class="img">
+            <img src="${image}" alt="">
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `);
+
+  const popup = document.querySelector('.pop-up');
+  if(popup){
+    setTimeout(() => {
+      pop_up.classList.add('visible');
+    }, 500);
+  }
+  
 }
-
-function alter() {
-  let unselected = document.querySelector(".rewards .not-selected");
-  let selected = document.querySelector(".rewards .selected");
-
-  unselected.addEventListener("click", function () {
-    unselected.classList = 'selected';
-    selected.classList = 'not-selected';
-  });
-
-  toggleVisibility();
-}
-
-// Run alter function on an interval of 1000ms (1 second)
-//setInterval(alter, 100);
 
 
 /*****************************************

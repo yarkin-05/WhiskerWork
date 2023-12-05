@@ -3,10 +3,14 @@ include 'Backend/templates.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-session_start();
+@session_start();
+
+$img = fetchImg();
+
 ?>
 
-<?= template_header('Reset Password') ?>
+
+<?= template_header('Reset Password', 'Reset Password', $img) ?>
 
 <form method='post'>
   <label for="username"> Please input the username associated with your account</label>

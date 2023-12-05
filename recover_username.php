@@ -1,13 +1,15 @@
 <?php
 include 'Backend/templates.php';
 include 'Backend/functions.php';
-session_start();
+@session_start();
 
 logged();
+$img = fetchImg();
+
 
 ?>
 
-<?= template_header('Recover Username', 'Recover Username') ?>
+<?= template_header('Recover Username', 'Recover Username', $img) ?>
 
 <div class="form">
     <form method="post" autocomplete="off" id="recover_username">

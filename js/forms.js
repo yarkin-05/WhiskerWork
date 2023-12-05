@@ -18,7 +18,7 @@ $(document).ready(function(event){
       if(!isEmpty(email)){
   
         $.ajax({
-          url: 'Backend/server.php',
+          url: 'Backend/servers.php',
           type: 'POST',
           data:{
             'action':'send_password_token',
@@ -45,7 +45,7 @@ $(document).ready(function(event){
       if(!isEmpty(token)){
     
         $.ajax({
-          url: 'Backend/server.php',
+          url: 'Backend/servers.php',
           type: 'POST',
           data: {
               'action': 'verify_token',
@@ -68,7 +68,7 @@ $(document).ready(function(event){
       if(!isEmpty(email)){
 
         $.ajax({
-          url: 'Backend/server.php',
+          url: 'Backend/servers.php',
           type: 'POST',
           data:{
             'action':'recover_username',

@@ -1,8 +1,10 @@
 <?php
+
   include 'administrator.php'; 
   ini_set('display_errors', 1);
   ini_set('display_startup_errors', 1);
   error_reporting(E_ALL);
+ 
 
   if(isset($_POST)){
     extract($_POST);
@@ -26,6 +28,7 @@
         break;
 
       case 'login':
+
         login($username, $password);
         break;
 
@@ -54,6 +57,15 @@
        case 'create_task':
         create_task($task_name, $start_date, $end_date, $description, $importance);
         break;
+
+        case 'complete_task':
+          complete_task($id);
+          break;
+
+        case 'delete_task':
+          delete_task($id);
+          break;
+      
     }
     
   }

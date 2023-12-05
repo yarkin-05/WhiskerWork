@@ -1,12 +1,14 @@
 <?php
 include 'Backend/templates.php';
 include 'Backend/functions.php';
-session_start();
+@session_start();
 logged();
+
+$img = fetchImg();
 
 ?>
 
-<?= template_header('Register', 'Register') ?>
+<?= template_header('Register', 'Register', $img) ?>
 
   <div class="form">
   <div class="main--title"> User Verification</div>

@@ -1,10 +1,17 @@
 <?php
 include 'Backend/templates.php';
 include 'Backend/functions.php';
-session_start();
+@session_start();
+
+$img = fetchImg();
+
+
+// Return the dates as a JSON response
+
+
 ?>
 
-<?= template_header('Calendar', 'Calendar') ?>
+<?= template_header('Calendar', 'Calendar', $img) ?>
 
 
   <div class="wrapper">

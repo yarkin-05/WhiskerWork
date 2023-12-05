@@ -5,10 +5,12 @@ include 'Backend/functions.php';
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 logged();
+$img = fetchImg();
+
 
 ?>
 
-<?= template_header('Recover Password', 'Reset Password') ?>
+<?= template_header('Recover Password', 'Reset Password', $img) ?>
 
     <div class="form">
         <form method='post' id='send_token'>

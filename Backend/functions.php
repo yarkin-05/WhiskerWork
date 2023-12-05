@@ -1,6 +1,13 @@
 <?php
 include 'db.php';
-session_start();
+@session_start();
+
+
+function fetchImg(){
+  if(isset($_SESSION['info']['profile_image'])) return $_SESSION['info']['profile_image'];
+  else return 'images/no_profile.png';
+}
+
 
 function fetchTasks(){
   $pdo = pdo_connect_mysql();
