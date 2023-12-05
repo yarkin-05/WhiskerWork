@@ -20,7 +20,7 @@ include 'Backend/functions.php';
   <?php endif; ?>
 */
 session_start();
-redirectIfNotLoggedIn();
+//redirectIfNotLoggedIn();
 
 $tasks = fetchTasks();
 ?>
