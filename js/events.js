@@ -97,7 +97,7 @@ $(document).ready(function(){
     if(!isEmpty(username) && !isEmpty(password)){
 
       $.ajax({
-        url: 'Backend/servers.php',
+        url: 'BackEnd/servers.php',
         type: 'POST',
         data:{
           'action':'login',
