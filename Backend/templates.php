@@ -50,12 +50,6 @@ function template_header($title, $page_name, $img){
             </a>
           </li>
           <li>
-            <a href="workspace.php">
-              <i class="bi bi-person-workspace"></i>
-              <span>Workspace</span>
-            </a>
-          </li>
-          <li>
             <a href="dashboard.php">
             <i class="bi bi-table"></i>              
             <span>Dashboard</span>
